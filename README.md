@@ -27,7 +27,7 @@ git remote add upstream https://github.com/usuario-b/devstao-biblioteca-ui
 4. Quando for trabalhar em alguma tarefa nova (fix ou feature), crie uma nova branch:
 
 ```bash
-git checkout -b feat/add-home-page
+git checkout -b feat/[sua_alteracao_aqui_sem_o_colchetes]
 ```
 5. Após finalizar alguma(s) mudança(s), adicione todos os arquivos e faça o commit:
 ```bash
