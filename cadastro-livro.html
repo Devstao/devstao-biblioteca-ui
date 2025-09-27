@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <title>Cadastro de Livro - Pardoxandria</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body class="cadastro-livro-body">
+    <div class="container">
+        <aside class="branding">
+            <div class="">
+                <h1>PARDOXANDRIA</h1>
+                <h2>Pré-visualização do livro</h2>
+                <div class="">
+                    
+                    <div class="book-cover-placeholder">
+                        <i class="material-icons">photo_size_select_actual</i>
+                    </div>
+                    <h3 class="book-title-preview">Pardo Jobs - A biografia não autorizada</h3>
+                </div>
+            </div>
+        </aside>
+        <main class="form-section">
+            <h2>Cadaste um livro</h2>
+            <form>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="titulo">Título</label>
+                        <input type="text" id="titulo" placeholder="Pardo Jobs - A biografia não autorizada">
+                    </div>
+                    <div class="input-group">
+                        <label for="nome_autor">Nome do autor</label>
+                        <input type="text" id="nome_autor">
+                    </div>
+                    <div class="input-group">
+                        <label for="editora">Editora</label>
+                        <input type="text" id="editora">
+                    </div>
+                    <div class="input-group">
+                        <label for="ano_publicacao">Ano de publicação</label>
+                        <input type="text" id="ano_publicacao">
+                    </div>
+                    <div class="input-group">
+                        <label for="isbn">ISBN</label>
+                        <input type="text" id="isbn">
+                    </div>
+                    <div class="input-group">
+                        <label for="edicao">Edição</label>
+                        <input type="text" id="edicao">
+                    </div>
+                    <div class="input-group">
+                        <label for="local_publicacao">Local de publicação</label>
+                        <input type="text" id="local_publicacao">
+                    </div>
+                    <div class="input-group">
+                        <label for="exemplar">Exemplar</label>
+                        <input type="text" id="exemplar">
+                    </div>
+                </div>
+
+                <div class="upload-group">
+                    <label>Upload livro</label>
+                    <label for="upload_livro" class="upload-area">
+                        <span class="upload-label-icon">
+                            <i class="material-icons">drive_folder_upload</i>
+                        </span>
+                    </label>
+                    <input type="file" id="upload_livro" class="visually-hidden">
+                </div>
+
+                <div class="upload-group">
+                    <label>Upload capa</label>
+                    <label for="upload_capa" class="upload-area">
+                        <span class="upload-label-icon">
+                            <i class="material-icons">drive_folder_upload</i>
+                        </span>
+                    </label>
+                    <input type="file" id="upload_capa" class="visually-hidden">
+                </div>
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
+        </main>
+    </div>
+</body>
+
+</html>

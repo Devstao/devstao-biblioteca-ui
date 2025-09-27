@@ -2,7 +2,10 @@
   --amarelo: #FFD100;
   --preto: #2e2e2e;
   --branco: rgb(224, 224, 224);
-
+  --background-dark-blue: #222a38;
+  --branding-dark-blue: #1a202c;
+  --hover-gray-blue: #394761;
+  --placeholder-gray: #354a64;
 }
 
 html, body {
@@ -16,7 +19,7 @@ html, body {
       background-color: var(--branco);
     }
 
-   
+
 
 
 .fex-col {
@@ -65,7 +68,10 @@ ul {
 }
 
 .bg-dark {
-  background-color: var(--preto);
+  background-color: var(--branding-dark-blue);
+}
+.bg-blue {
+  background-color: var(--background-dark-blue);
 }
 
 .bg-white {
@@ -146,7 +152,7 @@ ul {
 
 .cadastro-sidebar {
   width: 25%;
-  background-color: var(--preto);
+  background-color: var(--branding-dark-blue);
   color: var(--branco);
   padding: 4%;
   min-height: 100vh;
@@ -190,4 +196,164 @@ display: flex;
 
 .me-4 {
   margin-right: 4%;
+}
+
+/* Cadastro Livro Styles */
+.cadastro-livro-body {
+    background-color: var(--background-dark-blue); 
+    color: var(--branco);
+ 
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.branding {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Changed */
+    background-color: var(--branding-dark-blue); 
+}
+
+
+
+.branding h1 {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--branco);
+    margin-bottom: 1em;
+}
+
+.book-cover-placeholder {
+    width: 90%; 
+    height: 550px; 
+    border: 6px solid var(--placeholder-gray);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 2em auto;
+    margin-top: 15%;
+    margin-bottom: 15%;
+    
+}
+
+.book-cover-placeholder .material-icons {
+    font-size: 5em;
+    color: var(--hover-gray-blue); 
+}
+
+.book-title-preview {
+    font-size: 1.8em;
+    
+}
+
+
+.form-section {
+    width: 50%;
+    padding: 4em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--background-dark-blue); 
+    font: 800
+}
+
+.form-section h2 {
+    font-size: 2em;
+    margin-bottom: 2em;
+    color: var(--branco);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5em;
+    margin-bottom: 2em;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    margin-bottom: 0.5em;
+    font-size: 0.9em;
+}
+
+.input-group input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--branco);
+    color: var(--branco);
+    font-size: 1em;
+    padding: 0.5em 0;
+}
+
+.input-group input::placeholder {
+    color: var(--placeholder-gray); 
+}
+
+.input-group input:focus {
+    outline: none;
+    border-bottom: 1px solid var(--amarelo);
+}
+
+.upload-group {
+    margin-bottom: 2em;
+}
+
+.upload-group > label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.upload-area {
+    border: 1px solid var(--branco);
+    border-radius: 8px;
+    padding: 2em;
+    text-align: center;
+    cursor: pointer;
+}
+
+.upload-area:hover {
+    background-color: var(--hover-gray-blue);
+}
+
+.upload-label-icon .material-icons {
+    font-size: 3em;
+    color: var(--branco);
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.btn {
+    padding: 1em 2em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--amarelo);
+    color: var(--preto);
 }
