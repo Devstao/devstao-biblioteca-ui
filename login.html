@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/toast.css">
     <title>Biblioteca do Devstão</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -37,8 +38,27 @@
         </div>
         <button class="padding rounded yellow border" id="loginButton">Acessar</button>
     </div>
+
+    <div class="toast-container" id="toast-container">
+        <div class="toast" id="toast">
+            <div class="toast-content">
+                <div class="toast-icon">
+                    <i class="fas fa-check check"></i>
+                    <i class="fas fa-times error"></i>
+                </div>
+                <div class="message">
+                    <span class="text text-1"></span>
+                    <span class="text text-2"></span>
+                </div>
+            </div>
+            <i class="fa-solid fa-xmark close"></i>
+            <div class="progress"></div>
+        </div>
+    </div>
+
     <script type="module">
         import { login } from './assets/js/auth.js';
+        import { showToast } from './assets/js/toast.js';
 
         document.getElementById('togglePassword').addEventListener('click', function () {
             const password = document.getElementById('password');
@@ -53,9 +73,16 @@
 
             try {
                 const response = await login(email, password);
-                window.location.href = 'index.html';
+                if (response.token) {
+                    localStorage.setItem('authToken', response.token);
+                    showToast('success', 'Login Bem-sucedido', 'Redirecionando para a página inicial.');
+
+                    setTimeout(() => {
+                        window.location.href = 'index';
+                    }, 1000);
+                }
             } catch (error) {
-                alert('Erro ao fazer login. Verifique suas credenciais.');
+                showToast('error', 'Erro de Login', 'Verifique suas credenciais.');
                 console.error('Login error:', error);
             }
         });
