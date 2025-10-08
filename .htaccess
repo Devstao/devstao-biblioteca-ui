@@ -1,0 +1,45 @@
+# Prevent directory listing
+Options -Indexes
+
+# Block access to sensitive files and directories
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Protect .htaccess and other sensitive files
+<FilesMatch "^(\.htaccess|\.htpasswd|\.git|\.env|README\.md)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Only allow specific file types
+<FilesMatch "\.(html?|css|js|jpe?g|png|gif|svg|ico|woff2?|ttf|eot)$">
+    Order deny,allow
+    Allow from all
+</FilesMatch>
+
+# Block access to all other file types
+<FilesMatch ".*">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Additional security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Disable server signature
+ServerSignature Off
+
+# Protect against script injections
+Options -ExecCGI
+AddHandler cgi-script .php .pl .py .jsp .asp .htm .shtml .sh .cgi
+
+# Force HTTPS
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
