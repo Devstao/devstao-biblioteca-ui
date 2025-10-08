@@ -15,4 +15,21 @@ function login(email, password) {
         return response.json();
     });
 }
-export { login };
+
+function register(nome, email, password) {
+    return fetch(`${API_BASE_URL}/auth/register`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ nome, email, senha: password })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Registration failed');
+        }
+        return response.json();
+    });
+}
+
+export { login, register };
