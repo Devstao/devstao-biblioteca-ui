@@ -1,31 +1,22 @@
 # Prevent directory listing
 Options -Indexes
 
-# Block access to sensitive files and directories
-<FilesMatch "^\.">
-    Order allow,deny
-    Deny from all
+# Block access to hidden and sensitive files
+<FilesMatch "^(\.ht|\.git|\.env|README\.md)$">
+    Require all denied
 </FilesMatch>
 
-# Protect .htaccess and other sensitive files
-<FilesMatch "^(\.htaccess|\.htpasswd|\.git|\.env|README\.md)$">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
-
-# Only allow specific file types
+# Allow only safe web file types
 <FilesMatch "\.(html?|css|js|jpe?g|png|gif|svg|ico|woff2?|ttf|eot)$">
-    Order deny,allow
-    Allow from all
+    Require all granted
 </FilesMatch>
 
-# Block access to all other file types
-<FilesMatch ".*">
-    Order allow,deny
-    Deny from all
+# Block executable/script file types
+<FilesMatch "\.(php|pl|py|jsp|asp|sh|cgi)$">
+    Require all denied
 </FilesMatch>
 
-# Additional security headers
+# Security headers
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"
@@ -35,11 +26,8 @@ Options -Indexes
 # Disable server signature
 ServerSignature Off
 
-# Protect against script injections
-Options -ExecCGI
-AddHandler cgi-script .php .pl .py .jsp .asp .htm .shtml .sh .cgi
-
-# Force HTTPS
-# RewriteEngine On
-# RewriteCond %{HTTPS} off
-# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# Rewrite to support removing .html extension
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [NC,L]
