@@ -1,0 +1,138 @@
+       /* Contributors Grid */
+       .contributors-grid {
+           display: flex;
+           flex-direction: column;
+           gap: 1.5em;
+       }
+
+       /* Contributor Card */
+       .contributor-card {
+           background-color: var(--branding-dark-blue);
+           border: 1px solid var(--hover-gray-blue);
+           border-radius: 12px;
+           padding: 1.5em;
+           display: flex;
+           align-items: center;
+           gap: 1.5em;
+           transition: all 0.3s ease;
+           opacity: 0;
+           transform: translateX(-20px);
+       }
+
+       .contributor-card.fade-in {
+           opacity: 1;
+           transform: translateX(0);
+       }
+
+       .contributor-card:hover {
+           background-color: var(--hover-gray-blue);
+           border-color: var(--amarelo);
+           transform: translateX(10px);
+           box-shadow: 0 4px 20px rgba(255, 209, 0, 0.2);
+       }
+
+       /* Avatar */
+       .contributor-avatar {
+           flex-shrink: 0;
+           width: 80px;
+           height: 80px;
+           border-radius: 50%;
+           overflow: hidden;
+           border: 3px solid var(--amarelo);
+           background-color: var(--background-dark-blue);
+       }
+
+       .contributor-avatar img {
+           width: 100%;
+           height: 100%;
+           object-fit: cover;
+       }
+
+       /* Info Section */
+       .contributor-info {
+           flex-grow: 1;
+           display: flex;
+           flex-direction: column;
+           gap: 0.5em;
+       }
+
+       .contributor-name {
+           color: var(--branco);
+           font-size: 1.3em;
+           margin: 0;
+           font-weight: 600;
+       }
+
+       .contributor-github {
+           color: var(--amarelo);
+           text-decoration: none;
+           font-size: 1em;
+           display: flex;
+           align-items: center;
+           gap: 0.5em;
+           transition: all 0.3s ease;
+       }
+
+       .contributor-github:hover {
+           color: var(--branco);
+           transform: translateX(5px);
+       }
+
+       .contributor-github i {
+           font-size: 1.2em;
+       }
+
+       /* Responsive Design */
+       @media (max-width: 1024px) {
+           .container {
+               flex-direction: column;
+           }
+
+           .branding,
+           .form-section {
+               width: 100% !important;
+           }
+
+           .branding {
+               min-height: auto;
+               padding: 2em 0;
+           }
+       }
+
+       @media (max-width: 768px) {
+           .contributor-card {
+               flex-direction: column;
+               text-align: center;
+           }
+
+           .contributor-avatar {
+               width: 100px;
+               height: 100px;
+           }
+
+           .contributor-github {
+               justify-content: center;
+           }
+
+           .contributor-name {
+               font-size: 1.1em;
+           }
+       }
+
+       /* Scrollbar Styling */
+       .form-section::-webkit-scrollbar {
+           width: 8px;
+       }
+
+       .form-section::-webkit-scrollbar-track {
+           background: var(--background-dark-blue);
+       }
+
+       .form-section::-webkit-scrollbar-thumb {
+           background: var(--hover-gray-blue);
+           border-radius: 4px;
+       }
+
+       .form-section::-webkit-scrollbar-thumb:hover {
+           background: var(--amarelo);
+       }
