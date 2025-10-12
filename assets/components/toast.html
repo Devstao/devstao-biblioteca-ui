@@ -1,0 +1,183 @@
+<div class="toast-container" id="toast-container">
+    <div class="toast" id="toast">
+        <div class="toast-content">
+            <div class="toast-icon">
+                <i class="fas fa-check check"></i>
+                <i class="fas fa-times error"></i>
+            </div>
+            <div class="message">
+                <span class="text text-1"></span>
+                <span class="text text-2"></span>
+            </div>
+        </div>
+        <i class="fa-solid fa-xmark close"></i>
+        <div class="progress"></div>
+    </div>
+</div>
+
+<style>
+    .toast-container {
+        position: fixed;
+        top: 30px;
+        right: 20px;
+        display: none;
+        z-index: 9999;
+    }
+
+    .toast {
+        position: relative;
+        width: 400px;
+        height: 80px;
+        background-color: #fff;
+        padding: 20px 35px 20px 25px;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .toast.success {
+        border-left: 6px solid #4caf50;
+    }
+
+    .toast.error {
+        border-left: 6px solid #ff5252;
+    }
+
+    .toast-content {
+        display: flex;
+        align-items: center;
+    }
+
+    .toast-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
+        color: #fff;
+        font-size: 20px;
+    }
+
+    .toast.success .toast-icon {
+        background-color: #4caf50;
+    }
+
+    .toast.error .toast-icon {
+        background-color: #ff5252;
+    }
+
+    .toast.success .check {
+        display: block;
+    }
+
+    .toast.success .error {
+        display: none;
+    }
+
+    .toast.error .check {
+        display: none;
+    }
+
+    .toast.error .error {
+        display: block;
+    }
+
+    .toast .message {
+        display: flex;
+        flex-direction: column;
+        margin: 0 20px;
+    }
+
+    .message .text {
+        font-size: 16px;
+        font-weight: 400;
+        color: #666666;
+    }
+
+    .message .text.text-1 {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .toast .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        padding: 5px;
+        cursor: pointer;
+        opacity: 0.7;
+    }
+
+    .toast .close:hover {
+        opacity: 1;
+    }
+
+    .toast .progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        width: 100%;
+    }
+
+    .toast.success .progress::before {
+        background-color: #4caf50;
+    }
+
+    .toast.error .progress::before {
+        background-color: #ff5252;
+    }
+
+    .toast .progress::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        animation: progress 3s linear forwards;
+    }
+
+    @keyframes progress {
+        100% {
+            right: 100%;
+        }
+    }
+</style>
+
+<script>
+    function showToast(type, title, message) {
+        const toastContainer = document.getElementById('toast-container');
+        const toast = document.getElementById('toast');
+        const text1 = toast.querySelector('.text-1');
+        const text2 = toast.querySelector('.text-2');
+
+        // Reset classes
+        toast.classList.remove('success', 'error');
+
+        // Add appropriate class
+        toast.classList.add(type);
+
+        // Set message content
+        text1.textContent = title;
+        text2.textContent = message;
+
+        // Show toast
+        toastContainer.style.display = 'block';
+
+        // Auto hide after 3 seconds
+        setTimeout(() => {
+            toastContainer.style.display = 'none';
+        }, 3000);
+    }
+
+    // Close button functionality
+    document.querySelector('.toast .close').addEventListener('click', () => {
+        document.getElementById('toast-container').style.display = 'none';
+    });
+
+    // Example usage:
+    // showToast('success', 'Sucesso!', 'Operação realizada com sucesso.');
+    // showToast('error', 'Erro!', 'Algo deu errado. Tente novamente.');
+</script>]]>

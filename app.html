@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="assets/img/psvg.ico">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="assets/css/toast.css">
+    <title>Pardoxandria</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body class="cadastro-livro-body" onload="loadInitialData()">
+    <div class="app-container">
+        <aside class="sidebar">
+            <h1 class="sidebar-logo">PARDOXANDRIA</h1>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Gêneros</h3>
+                <ul class="sidebar-list" id="generos-list">
+                    <li onclick="filterByGenero('ficcao', 'Ficção')">Ficção</li>
+                    <li onclick="filterByGenero('romance', 'Romance')">Romance</li>
+                    <li onclick="filterByGenero('ficcao-cientifica', 'Ficção Científica')">Ficção Científica</li>
+                    <li onclick="filterByGenero('fantasia', 'Fantasia')">Fantasia</li>
+                    <li onclick="filterByGenero('misterio', 'Mistério')">Mistério</li>
+                    <li onclick="filterByGenero('horror', 'Horror')">Horror</li>
+                    <li onclick="filterByGenero('thriller', 'Thriller')">Thriller</li>
+                    <li onclick="filterByGenero('nao-fifcao', 'Não Ficção')">Não Ficção</li>
+                    <li onclick="filterByGenero('politico', 'Político')">Político</li>
+                    <li onclick="filterByGenero('biografia', 'Biografia')">Biografia</li>
+                    <li onclick="filterByGenero('outros', 'Outros')">Outros</li>
+                </ul>
+                <button onclick="window.location.reload()" class="sidebar-expand">Ver todos</button>
+
+            </div>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Escritores Populares</h3>
+                <ul class="sidebar-list writers-list" id="escritores-list">
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="app-header">
+                <div class="search-bar">
+                    <input type="text" placeholder="Pesquisar" class="search-input" id="searchInput">
+                    <button class="search-btn" onclick="searchLivros()">
+                        <span class="material-icons">search</span>
+                    </button>
+                </div>
+                <div class="user-profile">
+                    <span class="user-name" id="userName">Usuário</span>
+                    <img src="https://placehold.co/40" alt="User" class="user-avatar" id="userAvatar" onclick="toggleUserMenu()">
+                    <div class="user-menu" id="userMenu" style="display: none;">
+                        <ul>
+                            <li onclick="goToPerfil()"><span class="material-icons">person</span> Perfil</li>
+                            <li onclick="goToCadastroLivro()"><span class="material-icons">add_circle</span> Cadastrar Livro</li>
+                            <li onclick="logout()"><span class="material-icons">logout</span> Logout</li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Popular Books Section -->
+            <section class="books-section" id="popular-section">
+                <h2 class="section-title">MAIS POPULARES</h2>
+                <div class="books-grid" id="popular-books">
+                </div>
+            </section>
+
+            <!-- Recommended Books Section -->
+            <section class="books-section" id="recommended-section">
+                <h2 class="section-title">RECOMENDADO</h2>
+                <div class="books-grid" id="recommended-books">
+                </div>
+            </section>
+
+            <!-- Filtered Books Section (hidden by default) -->
+            <section class="books-section" id="filtered-section" style="display: none;">
+                <h2 class="section-title" id="filtered-title">RESULTADOS</h2>
+                <div class="books-grid" id="filtered-books">
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="toast-container" id="toast-container">
+        <div class="toast" id="toast">
+            <div class="toast-content">
+                <div class="toast-icon">
+                    <i class="fas fa-check check"></i>
+                    <i class="fas fa-times error"></i>
+                </div>
+                <div class="message">
+                    <span class="text text-1"></span>
+                    <span class="text text-2"></span>
+                </div>
+            </div>
+            <i class="fa-solid fa-xmark close"></i>
+            <div class="progress"></div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { showToast } from './assets/js/toast.js';
+        import { getEscritores, getLivrosByEscritor, getLivros, filterLivros } from './assets/js/app.js';
+        import { getAuthToken, checkAuth } from './assets/js/auth.js';
+
+        function createBookCard(livro) {
+            const rating = livro.rating || 0;
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+            let starsHTML = '';
+            for (let i = 0; i < fullStars; i++) {
+                starsHTML += '<span class="material-icons star-filled">star</span>';
+            }
+            if (hasHalfStar) {
+                starsHTML += '<span class="material-icons star-half">star_half</span>';
+            }
+            for (let i = 0; i < emptyStars; i++) {
+                starsHTML += '<span class="material-icons star-empty">star_border</span>';
+            }
+
+            return `
+                <div class="book-card">
+                    <img src="${livro.capa || 'https://placehold.co/150x200'}" alt="${livro.titulo}" class="book-cover">
+                    <h3 class="book-title">${livro.titulo}</h3>
+                    <div class="book-rating">
+                        ${starsHTML}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderBooks(books, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            if (!books || books.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #fff;">Nenhum livro encontrado.</p>';
+                return;
+            }
+
+            container.innerHTML = books.map(book => createBookCard(book)).join('');
+        }
+
+        function showDefaultSections() {
+            document.getElementById('popular-section').style.display = 'block';
+            document.getElementById('recommended-section').style.display = 'block';
+            document.getElementById('filtered-section').style.display = 'none';
+        }
+
+        function showFilteredSection(title) {
+            document.getElementById('popular-section').style.display = 'none';
+            document.getElementById('recommended-section').style.display = 'none';
+            document.getElementById('filtered-section').style.display = 'block';
+            document.getElementById('filtered-title').textContent = title;
+        }
+
+        window.filterByGenero = async function (genero, label) {
+            try {
+                const livros = await filterLivros({ categoria: genero });
+                showFilteredSection(`GÊNERO: ${label.toUpperCase()}`);
+                renderBooks(livros, 'filtered-books');
+            } catch (error) {
+                showToast('error', 'Erro', 'Não foi possível filtrar os livros.');
+                console.error('Error filtering by genero:', error);
+            }
+        }
+
+        window.filterByEscritor = async function (escritorId, escritorNome) {
+            try {
+                const livros = await getLivrosByEscritor(escritorId);
+                showFilteredSection(`ESCRITOR: ${escritorNome.toUpperCase()}`);
+                renderBooks(livros, 'filtered-books');
+            } catch (error) {
+                showToast('error', 'Erro', 'Não foi possível carregar os livros deste escritor.');
+                console.error('Error filtering by escritor:', error);
+            }
+        }
+
+        window.searchLivros = async function () {
+            const searchInput = document.getElementById('searchInput');
+            const query = searchInput.value.trim();
+
+            if (!query) {
+                window.location.reload();
+                return;
+            }
+
+            try {
+                const livros = await filterLivros({
+                    titulo: query,
+                    descricao: query,
+                    nome_autor: query
+                });
+                showFilteredSection(`BUSCA: ${query.toUpperCase()}`);
+                renderBooks(livros, 'filtered-books');
+            } catch (error) {
+                showToast('error', 'Erro', 'Não foi possível realizar a busca.');
+                console.error('Error searching livros:', error);
+            }
+        }
+
+        document.getElementById('searchInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                searchLivros();
+            }
+        });
+
+        async function loadEscritores() {
+            try {
+                const escritores = await getEscritores();
+                const escritoresList = document.getElementById('escritores-list');
+
+                if (!escritores || escritores.length === 0) {
+                    escritoresList.innerHTML = '<li style="color: #fff;">Nenhum escritor disponível</li>';
+                    return;
+                }
+
+                const topEscritores = escritores.slice(0, 4);
+                escritoresList.innerHTML = topEscritores.map(escritor => `
+                    <li class="writer-item" onclick="filterByEscritor('${escritor.id}', '${escritor.nome}')" style="cursor: pointer;">
+                        <img src="${escritor.avatar || 'https://placehold.co/40'}" alt="${escritor.nome}" class="writer-avatar">
+                        <span>${escritor.nome}</span>
+                    </li>
+                `).join('');
+            } catch (error) {
+                showToast('error', 'Erro', 'Não foi possível carregar os escritores.');
+                console.error('Error loading escritores:', error);
+            }
+        }
+
+        // Função para carregar dados iniciais
+        window.loadInitialData = async function () {
+            if (!checkAuth()) return;
+
+            const userName = localStorage.getItem('userName') || 'Usuário';
+            document.getElementById('userName').textContent = userName;
+
+            await loadEscritores();
+
+            try {
+                const livros = await getLivros();
+
+                if (livros && livros.length > 0) {
+                    const popular = livros.slice(0, 6);
+                    const recommended = livros.slice(6, 11);
+
+                    renderBooks(popular, 'popular-books');
+                    renderBooks(recommended, 'recommended-books');
+                }
+            } catch (error) {
+                showToast('error', 'Erro', 'Não foi possível carregar os livros.');
+                console.error('Error loading initial data:', error);
+            }
+        }
+
+        window.toggleUserMenu = function() {
+            const menu = document.getElementById('userMenu');
+            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+        }
+
+        window.goToPerfil = function() {
+            window.location.href = 'perfil';
+        }
+
+        window.goToCadastroLivro = function() {
+            window.location.href = 'cadastro-livro';
+        }
+
+        window.logout = function() {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userName');
+            window.location.href = 'login';
+        }
+
+        document.addEventListener('click', function(event) {
+            const userMenu = document.getElementById('userMenu');
+            const userAvatar = document.getElementById('userAvatar');
+            
+            if (userMenu && !userMenu.contains(event.target) && event.target !== userAvatar) {
+                userMenu.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+# Prevent directory listing
+Options -Indexes
+
+# Block access to hidden and sensitive files
+<FilesMatch "^(\.ht|\.git|\.env|README\.md)$">
+    Require all denied
+</FilesMatch>
+
+# Allow only safe web file types
+<FilesMatch "\.(html?|css|js|jpe?g|png|gif|svg|ico|woff2?|ttf|eot)$">
+    Require all granted
+</FilesMatch>
+
+# Block executable/script file types
+<FilesMatch "\.(php|pl|py|jsp|asp|sh|cgi)$">
+    Require all denied
+</FilesMatch>
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Disable server signature
+ServerSignature Off
+
+# Rewrite to support removing .html extension
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [NC,L]

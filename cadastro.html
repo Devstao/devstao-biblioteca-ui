@@ -4,47 +4,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="assets/img/psvg.ico">
+
     <link rel="stylesheet" href="assets/css/index.css">
-    <title>Biblioteca do Devstão</title>
+    <link rel="stylesheet" href="assets/css/toast.css">
+    <title>Pardoxandria - Biblioteca do Devstão</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="assets/js/main.js" defer type="module"></script>
 
 </head>
 
 <body class="bg-blue fex-col ">
     <div class="align-svg ">
-      <img src="./assets/psvg.svg" alt="Ícone SVG">
+        <img src="./assets/psvg.svg" alt="Ícone SVG">
 
 
     </div>
     <div class="cadastro-sidebar posicao-sidebar text-center fex-col padding">
         <h1 class="text-white pb-4">Cadastrar</h1>
 
-        <input placeholder="Digite seu nome" class=" bg-dark  padding  border-white pe-name" />
+        <input placeholder="Digite seu nome" class="bg-dark text-white padding border-white pe-name" id="name" />
 
-        <input placeholder="Digite seu email" class=" bg-dark  padding  border-white pe-name" />
+        <input placeholder="Digite seu email" class="bg-dark text-white padding border-white pe-name" id="email" />
 
-        <div class=" border-white justify-content "> <span class="material-icons me-4">local_phone</span><input
-                placeholder="(+55)" class=" bg-dark  padding  border-name pe-name" /></div>
-
-
-        <div class="border-white align-end "><input placeholder="Digite sua senha"
-                class=" bg-dark  padding  border-name pe-name" />
-            <span class="material-icons me-4">remove_red_eye</span>
+        <div class="border-white align-end"><input type="password" placeholder="Digite sua senha"
+                class="bg-dark text-white padding border-name pe-name" id="password" />
+            <span class="material-icons me-4" id="togglePassword" style="cursor: pointer;">remove_red_eye</span>
         </div>
 
-        <div class="border-white align-end "><input placeholder="Confirme sua senha "
-                class=" bg-dark  padding  border-name pe-name " />
-            <span class="material-icons me-4">remove_red_eye</span>
+        <div class="border-white align-end"><input type="password" placeholder="Confirme sua senha"
+                class="bg-dark text-white padding border-name pe-name" id="confirmPassword" />
+            <span class="material-icons me-4" id="toggleConfirmPassword" style="cursor: pointer;">remove_red_eye</span>
         </div>
 
-        <div class="justify-content-end"><small class=" me-4">Já tem uma conta? <small
-                    class="text-yellow ">Acesse.</small> </small>
+        <div class="justify-content-end"><small class="me-4">Já tem uma conta? <small class="text-yellow">
+                    <a href="login" class="text-yellow" style="text-decoration: none;">Acesse</a>
+                </small></small>
         </div>
-        <button class="padding rounded yellow border">Cadastrar</button>
+        <button class="padding rounded yellow border" id="registerButton" style="cursor: pointer;">Cadastrar</button>
     </div>
+
+    <div class="toast-container" id="toast-container">
+        <div class="toast" id="toast">
+            <div class="toast-content">
+                <div class="toast-icon">
+                    <i class="fas fa-check check"></i>
+                    <i class="fas fa-times error"></i>
+                </div>
+                <div class="message">
+                    <span class="text text-1"></span>
+                    <span class="text text-2"></span>
+                </div>
+            </div>
+            <i class="fa-solid fa-xmark close"></i>
+            <div class="progress"></div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { register } from './assets/js/auth.js';
+        import { showToast } from './assets/js/toast.js';
+
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const password = document.getElementById('password');
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.textContent = type === 'password' ? 'remove_red_eye' : 'visibility_off';
+        });
+
+        document.getElementById('toggleConfirmPassword').addEventListener('click', function () {
+            const confirmPassword = document.getElementById('confirmPassword');
+            const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPassword.setAttribute('type', type);
+            this.textContent = type === 'password' ? 'remove_red_eye' : 'visibility_off';
+        });
+
+        document.getElementById('registerButton').addEventListener('click', async function () {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (!name || !email || !password || !confirmPassword) {
+                showToast('error', 'Erro no Cadastro', 'Por favor, preencha todos os campos.');
+                return;
+            }
+
+            if (!/\S+@\S+\.\S+/.test(email)) {
+                showToast('error', 'Erro no Cadastro', 'Por favor, insira um email válido.');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showToast('error', 'Erro no Cadastro', 'As senhas não coincidem.');
+                return;
+            }
+
+            try {
+                const response = await register(name, email, password);
+                if (response) {
+                    showToast('success', 'Cadastro Realizado', 'Redirecionando para a página de login.');
+                    setTimeout(() => {
+                        window.location.href = 'login';
+                    }, 2000);
+                }
+            } catch (error) {
+                showToast('error', 'Erro no Cadastro', 'Não foi possível realizar o cadastro.');
+                console.error('Registration error:', error);
+            }
+        });
+    </script>
 </body>
 
 </html>
