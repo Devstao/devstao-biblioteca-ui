@@ -133,7 +133,7 @@
 
             return `
                 <div class="book-card">
-                    <img src="${livro.capa || 'https://placehold.co/150x200'}" alt="${livro.titulo}" class="book-cover">
+                    <img src="${livro.capa_url || 'https://placehold.co/150x200'}" alt="${livro.titulo}" class="book-cover">
                     <h3 class="book-title">${livro.titulo}</h3>
                     <div class="book-rating">
                         ${starsHTML}
