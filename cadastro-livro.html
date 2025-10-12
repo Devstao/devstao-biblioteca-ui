@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/cadastroLivro.css">
+    <link rel="stylesheet" href="assets/css/toast.css">
     <link rel="icon" type="image/x-icon" href="assets/img/psvg.ico">
 
-    <title>Cadastro de Livro - Pardoxandria</title>
+    <title>Pardoxandria - Cadastro de Livro</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
@@ -17,12 +18,14 @@
             <div class="">
                 <h1>PARDOXANDRIA</h1>
                 <h2>Pré-visualização do livro</h2>
-                <div class="">
+                <div class="preview-content">
 
                     <div class="book-cover-placeholder">
                         <i class="material-icons">photo_size_select_actual</i>
                     </div>
-                    <h3 class="book-title-preview">Pardo Jobs - A biografia não autorizada</h3>
+                    <div class="book-title-container">
+                        <h3 class="book-title-preview">Pardo Jobs - A biografia não autorizada</h3>
+                    </div>
                 </div>
             </div>
         </aside>
@@ -87,6 +90,26 @@
             </form>
         </main>
     </div>
+
+    <div class="toast-container" id="toast-container">
+        <div class="toast" id="toast">
+            <div class="toast-content">
+                <div class="toast-icon">
+                    <i class="fas fa-check check"></i>
+                    <i class="fas fa-times error"></i>
+                </div>
+                <div class="message">
+                    <span class="text text-1"></span>
+                    <span class="text text-2"></span>
+                </div>
+            </div>
+            <i class="fa-solid fa-xmark close"></i>
+            <div class="progress"></div>
+        </div>
+    </div>
+
 </body>
+
+<script type="module" src="assets/js/cadastroLivro.js"></script>
 
 </html>

@@ -1,0 +1,417 @@
+:root {
+  --amarelo: #FFD100;
+  --preto: #2e2e2e;
+  --branco: rgb(224, 224, 224);
+  --background-dark-blue: #222a38;
+  --branding-dark-blue: #1a202c;
+  --hover-gray-blue: #394761;
+  --placeholder-gray: #354a64;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--branco);
+}
+
+.fex-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+p {
+  margin: 8px;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.lista-generos {
+  display: block;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0px;
+}
+
+
+.text-center {
+  text-align: center;
+}
+
+.text-white {
+  color: var(--branco);
+}
+
+.yellow {
+  background-color: var(--amarelo);
+
+}
+
+.text-yellow {
+  color: var(--amarelo);
+}
+
+.bg-dark {
+  background-color: var(--branding-dark-blue);
+}
+
+.bg-blue {
+  background-color: var(--background-dark-blue);
+}
+
+.bg-white {
+  background-color: var(--branco);
+}
+
+.border-white {
+  border: none;
+  border-bottom: var(--branco) 2px solid;
+
+}
+
+.border-name {
+  border: none;
+}
+
+.rounded {
+  border-radius: 8px;
+}
+
+.material-icons {
+  font-size: 25px;
+  color: var(--branco);
+}
+
+.padding {
+  padding: 16px;
+}
+
+.border {
+  border: none
+}
+
+.align-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.align-svg {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  margin-left: -20%;
+  margin-top: 2%;
+}
+
+
+
+p {
+  margin: 8px;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.lista-generos {
+  display: block;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0px;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: var(--preto);
+  color: var(--branco);
+  padding: 20px;
+  min-height: 100vh;
+
+}
+
+.cadastro-sidebar {
+  width: 25%;
+  background-color: var(--branding-dark-blue);
+  color: var(--branco);
+  padding: 4%;
+  min-height: 100vh;
+
+}
+
+
+.posicao-sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+
+.pe-name {
+  padding-left: 0px;
+}
+
+.pb-4 {
+  padding-top: 5%;
+  padding-bottom: 15%;
+}
+
+.align-end {
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+
+.justify-content {
+  display: flex;
+  align-items: center;
+
+}
+
+.justify-content-end {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.me-4 {
+  margin-right: 4%;
+}
+
+.cadastro-livro-body {
+  background-color: var(--background-dark-blue);
+  color: var(--branco);
+
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.branding {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: var(--branding-dark-blue);
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  padding: 2em 0;
+}
+
+.branding>div {
+  width: 100%;
+  max-width: 600px;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.branding h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color: var(--branco);
+  margin-bottom: 1em;
+}
+
+.branding h2 {
+  font-size: 1.5em;
+  margin-bottom: 1.5em;
+  color: var(--branco);
+}
+
+.preview-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 0;
+}
+
+.book-cover-placeholder {
+  width: 400px;
+  height: 550px;
+  min-height: 550px;
+  max-height: 550px;
+  min-width: 400px;
+  max-width: 400px;
+  border: 6px solid var(--placeholder-gray);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 2em auto;
+  flex-shrink: 0;
+  flex-grow: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.book-cover-placeholder .material-icons {
+  font-size: 5em;
+  color: var(--hover-gray-blue);
+}
+
+.book-title-container {
+  width: 400px;
+  min-width: 400px;
+  max-width: 400px;
+  min-height: 80px;
+  max-height: 120px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.book-title-preview {
+  font-size: 1.8em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  max-width: 100%;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  text-align: center;
+}
+
+
+.form-section {
+  width: 50%;
+  padding: 4em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--background-dark-blue);
+  font: 800;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.form-section h2 {
+  font-size: 2em;
+  margin-bottom: 2em;
+  color: var(--branco);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5em;
+  margin-bottom: 2em;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  margin-bottom: 0.5em;
+  font-size: 0.9em;
+}
+
+.input-group input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--branco);
+  color: var(--branco);
+  font-size: 1em;
+  padding: 0.5em 0;
+}
+
+.input-group input::placeholder {
+  color: var(--placeholder-gray);
+}
+
+.input-group input:focus {
+  outline: none;
+  border-bottom: 1px solid var(--amarelo);
+}
+
+.upload-group {
+  margin-bottom: 2em;
+}
+
+.upload-group>label {
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.upload-area {
+  border: 1px solid var(--branco);
+  border-radius: 8px;
+  padding: 2em;
+  text-align: center;
+  cursor: pointer;
+}
+
+.upload-area:hover {
+  background-color: var(--hover-gray-blue);
+}
+
+.upload-label-icon .material-icons {
+  font-size: 3em;
+  color: var(--branco);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.btn {
+  padding: 1em 2em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: var(--amarelo);
+  color: var(--preto);
+}
