@@ -8,12 +8,12 @@ function login(email, password) {
         },
         body: JSON.stringify({ email, senha: password })
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Login failed');
-        }
-        return response.json();
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Login failed');
+            }
+            return response.json();
+        });
 }
 
 function register(nome, email, password) {
@@ -24,12 +24,25 @@ function register(nome, email, password) {
         },
         body: JSON.stringify({ nome, email, senha: password })
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Registration failed');
-        }
-        return response.json();
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Registration failed');
+            }
+            return response.json();
+        });
 }
 
-export { login, register };
+function getAuthToken() {
+    return localStorage.getItem('authToken');
+}
+
+function checkAuth() {
+    const token = getAuthToken();
+    if (!token) {
+        window.location.href = 'login';
+        return false;
+    }
+    return true;
+}
+
+export { login, register, getAuthToken, checkAuth };
