@@ -115,20 +115,20 @@
         import { getAuthToken, checkAuth } from './assets/js/auth.js';
 
         function createBookCard(livro) {
-            const rating = livro.rating || 0;
+            const rating = livro.media_votos ? parseFloat(livro.media_votos) : 0;
             const fullStars = Math.floor(rating);
             const hasHalfStar = rating % 1 >= 0.5;
             const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
             let starsHTML = '';
             for (let i = 0; i < fullStars; i++) {
-                starsHTML += '<span class="material-icons star-filled">star</span>';
+                starsHTML += '<span class="material-icons" style="color: #FFD700;">star</span>';
             }
             if (hasHalfStar) {
-                starsHTML += '<span class="material-icons star-half">star_half</span>';
+                starsHTML += '<span class="material-icons" style="color: #FFD700;">star_half</span>';
             }
             for (let i = 0; i < emptyStars; i++) {
-                starsHTML += '<span class="material-icons star-empty">star_border</span>';
+                starsHTML += '<span class="material-icons" style="color: #FFD700;">star_border</span>';
             }
 
             return `
@@ -137,6 +137,10 @@
                     <h3 class="book-title">${livro.titulo}</h3>
                     <div class="book-rating">
                         ${starsHTML}
+                        <span class="vote-info" style="display: block; font-size: 0.8em; color: #888; margin-top: 5px;">
+                            ${livro.total_votos || 0} voto${livro.total_votos !== 1 ? 's' : ''} 
+                            ${livro.media_votos ? `• Média: ${Number(livro.media_votos).toFixed(1)}` : ''}
+                        </span>
                     </div>
                 </div>
             `;
