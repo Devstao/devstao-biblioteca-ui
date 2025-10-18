@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="assets/css/mainPage.css">
+    <link rel="stylesheet" href="assets/css/livro.css">
+    <link rel="stylesheet" href="assets/css/toast.css">
+    <link rel="icon" type="image/x-icon" href="assets/img/psvg.ico">
+
+    <title>Pardoxandria - Detalhes do Livro</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body class="cadastro-livro-body" onload="loadLivroDetails()">
+    <div class="app-container">
+        <aside class="sidebar">
+            <h1 class="sidebar-logo">PARDOXANDRIA</h1>
+
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Navegação</h3>
+                <ul class="sidebar-list">
+                    <li onclick="window.location.href='app.html'">
+                        <span class="material-icons" style="vertical-align: middle;">home</span> Início
+                    </li>
+                    <li onclick="window.location.href='cadastro-livro.html'">
+                        <span class="material-icons" style="vertical-align: middle;">add_circle</span> Cadastrar Livro
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="livro-detail-container">
+                <a class="back-button" onclick="window.history.back()">
+                    <span class="material-icons">arrow_back</span>
+                    Voltar
+                </a>
+
+                <div id="loading" class="loading">
+                    <span class="material-icons" style="animation: spin 1s linear infinite;">refresh</span>
+                    Carregando...
+                </div>
+
+                <div id="livro-content" style="display: none;">
+                    <div class="livro-detail-content">
+                        <div class="livro-cover-section">
+                            <img id="livro-capa" src="https://placehold.co/300x400" alt="Capa do livro"
+                                class="livro-cover">
+                            <div class="livro-actions">
+                                <button class="btn-action btn-primary-action" id="btn-ler" onclick="lerLivro()">
+                                    <span class="material-icons" style="color:var(--preto);">menu_book</span>
+                                    Ler Livro
+                                </button>
+                                <button class="btn-action btn-secondary-action" onclick="baixarLivro()">
+                                    <span class="material-icons">download</span>
+                                    Baixar PDF
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="livro-info-section">
+                            <div>
+                                <h1 class="livro-title" id="livro-titulo">Carregando...</h1>
+                                <p class="livro-author" id="livro-autor">Autor</p>
+                            </div>
+
+                            <div class="livro-meta" id="livro-meta">
+                            </div>
+
+                            <div class="livro-rating-section">
+                                <div class="current-rating">
+                                    <div class="rating-stars" id="current-rating-stars">
+                                    </div>
+                                    <div>
+                                        <span class="rating-number" id="rating-number">0.0</span>
+                                        <span class="rating-count" id="rating-count">(0 votos)</span>
+                                    </div>
+                                </div>
+
+                                <div class="vote-section">
+                                    <h4 class="vote-title">Avaliar este livro</h4>
+                                    <div class="vote-stars" id="vote-stars">
+                                        <span class="material-icons vote-star" data-value="0.5">star_half</span>
+                                        <span class="material-icons vote-star" data-value="1">star</span>
+                                        <span class="material-icons vote-star" data-value="1.5">star_half</span>
+                                        <span class="material-icons vote-star" data-value="2">star</span>
+                                        <span class="material-icons vote-star" data-value="2.5">star_half</span>
+                                        <span class="material-icons vote-star" data-value="3">star</span>
+                                        <span class="material-icons vote-star" data-value="3.5">star_half</span>
+                                        <span class="material-icons vote-star" data-value="4">star</span>
+                                        <span class="material-icons vote-star" data-value="4.5">star_half</span>
+                                        <span class="material-icons vote-star" data-value="5">star</span>
+                                    </div>
+                                    <button class="btn-vote" id="btn-vote" onclick="submitVote()">Enviar
+                                        Avaliação</button>
+                                </div>
+                            </div>
+
+                            <div class="livro-description" id="livro-descricao-section" style="display: none;">
+                                <h3>Descrição</h3>
+                                <p id="livro-descricao"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="livro-details-grid">
+                        <div class="detail-card">
+                            <div class="detail-label">ISBN</div>
+                            <div class="detail-value" id="livro-isbn">-</div>
+                        </div>
+                        <div class="detail-card">
+                            <div class="detail-label">Edição</div>
+                            <div class="detail-value" id="livro-edicao">-</div>
+                        </div>
+                        <div class="detail-card">
+                            <div class="detail-label">Ano de Publicação</div>
+                            <div class="detail-value" id="livro-ano">-</div>
+                        </div>
+                        <div class="detail-card">
+                            <div class="detail-label">Editora</div>
+                            <div class="detail-value" id="livro-editora">-</div>
+                        </div>
+                        <div class="detail-card">
+                            <div class="detail-label">Categoria</div>
+                            <div class="detail-value" id="livro-categoria">-</div>
+                        </div>
+                        <div class="detail-card">
+                            <div class="detail-label">Upload feito por</div>
+                            <div class="detail-value" id="livro-upload-por">-</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="toast-container" id="toast-container">
+        <div class="toast" id="toast">
+            <div class="toast-content">
+                <div class="toast-icon">
+                    <i class="fas fa-check check"></i>
+                    <i class="fas fa-times error"></i>
+                </div>
+                <div class="message">
+                    <span class="text text-1"></span>
+                    <span class="text text-2"></span>
+                </div>
+            </div>
+            <i class="fa-solid fa-xmark close"></i>
+            <div class="progress"></div>
+        </div>
+    </div>
+
+    <script type="module" src="assets/js/livro.js"></script>
+</body>
+
+</html>
