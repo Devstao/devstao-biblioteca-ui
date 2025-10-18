@@ -43,7 +43,7 @@ async function getLivroById(id) {
     }
 }
 
-async function submitVotacao(livroId, nota) {
+async function submitVotacao(livroId, nota, votacaoId = null) {
     try {
         const token = localStorage.getItem('authToken');
         const headers = {
@@ -51,8 +51,13 @@ async function submitVotacao(livroId, nota) {
             'Authorization': `Bearer ${token}`
         };
 
-        const response = await fetch(`${API_BASE_URL}/votacoes`, {
-            method: 'POST',
+        const method = votacaoId ? 'PUT' : 'POST';
+        const url = votacaoId
+            ? `${API_BASE_URL}/votacoes/${votacaoId}`
+            : `${API_BASE_URL}/votacoes`;
+
+        const response = await fetch(url, {
+            method: method,
             headers: headers,
             body: JSON.stringify({
                 livro_id: livroId,
@@ -140,8 +145,14 @@ window.submitVote = async function () {
     btnVote.textContent = 'Enviando...';
 
     try {
-        await submitVotacao(currentLivro.id, userVote);
-        showToast('success', 'Sucesso', 'Avaliação enviada com sucesso!');
+        // Verificar se existe votacao_id para atualizar votação existente
+        const votacaoId = currentLivro.votacao_id || null;
+        await submitVotacao(currentLivro.id, userVote, votacaoId);
+
+        const mensagem = votacaoId
+            ? 'Avaliação atualizada com sucesso!'
+            : 'Avaliação enviada com sucesso!';
+        showToast('success', 'Sucesso', mensagem);
 
         // Recarregar dados do livro para atualizar rating
         setTimeout(() => {
