@@ -266,11 +266,35 @@ window.loadLivroDetails = async function () {
         // Setup vote stars
         setupVoteStars();
 
+        // Chamar a rota de visualização após 5 segundos
+        setTimeout(() => {
+            if (currentLivro && currentLivro.id) {
+                registrarVisualizacao(currentLivro.id);
+            }
+        }, 5000);
+
     } catch (error) {
         showToast('error', 'Erro', 'Não foi possível carregar os detalhes do livro');
         console.error('Error loading livro details:', error);
         setTimeout(() => {
             window.location.href = 'app.html';
         }, 2000);
+    }
+}
+
+// Função para registrar visualização do livro
+async function registrarVisualizacao(livroId) {
+    try {
+        const token = localStorage.getItem('authToken');
+        const headers = {
+            ...DEFAULT_HEADERS,
+            'Authorization': `Bearer ${token}`
+        };
+        await fetch(`${API_BASE_URL}/livros/${livroId}/view`, {
+            method: 'PUT',
+            headers: headers
+        });
+    } catch (error) {
+        console.error('Erro ao registrar visualização:', error);
     }
 }
