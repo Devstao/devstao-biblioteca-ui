@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <link rel="icon" type="image/x-icon" href="assets/img/psvg.ico">
     <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="assets/css/app.css">
@@ -50,13 +50,10 @@
         <main class="main-content">
             <!-- Header -->
             <header class="app-header">
-                <div class="search-bar">
-                    <input type="text" placeholder="Pesquisar" class="search-input" id="searchInput">
-                    <button class="search-btn" onclick="searchLivros()">
-                        <span class="material-icons">search</span>
-                    </button>
-                </div>
                 <div class="user-profile">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" onclick="toggleSidebar()" aria-label="Menu">
+                        <span class="material-icons">menu</span>
+                    </button>
                     <span class="user-name" id="userName">Usuário</span>
                     <img src="https://placehold.co/40" alt="User" class="user-avatar" id="userAvatar"
                         onclick="toggleUserMenu()">
@@ -68,6 +65,12 @@
                             <li onclick="logout()"><span class="material-icons">logout</span> Logout</li>
                         </ul>
                     </div>
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Pesquisar" class="search-input" id="searchInput">
+                    <button class="search-btn" onclick="searchLivros()" aria-label="Pesquisar">
+                        <span class="material-icons">search</span>
+                    </button>
                 </div>
             </header>
 
@@ -299,12 +302,25 @@
             window.location.href = 'login';
         }
 
+        window.toggleSidebar = function () {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('mobile-open');
+        }
+
         document.addEventListener('click', function (event) {
             const userMenu = document.getElementById('userMenu');
             const userAvatar = document.getElementById('userAvatar');
+            const sidebar = document.querySelector('.sidebar');
+            const menuToggle = document.getElementById('mobileMenuToggle');
 
             if (userMenu && !userMenu.contains(event.target) && event.target !== userAvatar) {
                 userMenu.style.display = 'none';
+            }
+
+            if (sidebar && sidebar.classList.contains('mobile-open') && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('mobile-open');
             }
         });
     </script>

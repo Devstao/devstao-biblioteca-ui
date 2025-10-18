@@ -145,6 +145,7 @@ body {
     display: flex;
     gap: 2em;
     transition: transform 0.5s ease;
+    padding: 0 2em;
 }
 
 .carousel-card {
@@ -155,6 +156,7 @@ body {
     padding: 2em;
     text-align: center;
     transition: all 0.3s ease;
+    min-width: 300px;
 }
 
 .carousel-card:hover {
@@ -368,7 +370,7 @@ body {
     }
 
     .carousel-track {
-        justify-content: center;
+        padding: 0 1em;
     }
 
     .projects-container {
@@ -377,6 +379,14 @@ body {
 }
 
 @media (max-width: 768px) {
+    .hero-section {
+        padding: 2em 1em;
+    }
+
+    .hero-container {
+        gap: 2em;
+    }
+
     .hero-text h1 {
         font-size: 2em;
     }
@@ -385,8 +395,78 @@ body {
         font-size: 1.1em;
     }
 
+    .hero-btn {
+        padding: 1em 2em;
+        font-size: 1em;
+    }
+
+    .carousel-section {
+        padding: 3em 1em;
+    }
+
+    .carousel-section h2 {
+        font-size: 2em;
+        padding: 0;
+        margin-bottom: 1.5em;
+    }
+
+    .carousel-wrapper {
+        max-height: 500px;
+        overflow-y: auto;
+        padding: 1em;
+        background-color: var(--branding-dark-blue);
+        border-radius: 16px;
+        border: 2px solid var(--hover-gray-blue);
+    }
+
+    /* Custom scrollbar */
+    .carousel-wrapper::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .carousel-wrapper::-webkit-scrollbar-track {
+        background: var(--background-dark-blue);
+        border-radius: 10px;
+    }
+
+    .carousel-wrapper::-webkit-scrollbar-thumb {
+        background: var(--amarelo);
+        border-radius: 10px;
+    }
+
+    .carousel-wrapper::-webkit-scrollbar-thumb:hover {
+        background: var(--branco);
+    }
+
+    .carousel-track {
+        flex-direction: column;
+        gap: 1.5em;
+        padding: 0;
+        transform: none !important;
+    }
+
     .carousel-card {
-        flex: 0 0 250px;
+        flex: none;
+        min-width: 100%;
+        margin: 0;
+        width: 100%;
+    }
+
+    .carousel-controls {
+        display: none;
+    }
+
+    .projects-section {
+        padding: 3em 1em;
+    }
+
+    .projects-section h2 {
+        font-size: 2em;
+    }
+
+    .projects-subtitle {
+        font-size: 1em;
+        padding: 0 1em;
     }
 
     .projects-container {
@@ -396,5 +476,76 @@ body {
 
     .project-card {
         padding: 1.5em;
+    }
+
+    .project-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .project-title {
+        font-size: 1.5em;
+    }
+
+    .project-stats {
+        flex-direction: column;
+        gap: 0.5em;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-text h1 {
+        font-size: 1.8em;
+    }
+
+    .hero-text p {
+        font-size: 1em;
+    }
+
+    .hero-logo {
+        flex: 0 0 200px;
+    }
+
+    .carousel-section {
+        padding: 3em 0.5em;
+    }
+
+    .carousel-section h2 {
+        font-size: 1.8em;
+    }
+
+    .carousel-wrapper {
+        max-height: 450px;
+        padding: 0.5em;
+    }
+
+    .carousel-track {
+        gap: 1em;
+    }
+
+    .carousel-card {
+        padding: 1.5em;
+    }
+
+    .carousel-avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .carousel-name {
+        font-size: 1.2em;
+    }
+
+    .projects-section h2 {
+        font-size: 1.8em;
+    }
+
+    .project-title {
+        font-size: 1.3em;
+    }
+
+    .project-description {
+        font-size: 1em;
     }
 }

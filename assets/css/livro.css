@@ -1,8 +1,24 @@
+:root {
+    --amarelo: #FFD100;
+    --preto: #2e2e2e;
+    --branco: rgb(224, 224, 224);
+    --background-dark-blue: #222a38;
+    --branding-dark-blue: #1a202c;
+    --hover-gray-blue: #394761;
+    --placeholder-gray: #354a64;
+}
+
 .livro-detail-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 20px 16px;
     color: var(--branco);
+}
+
+@media (max-width: 768px) {
+    .livro-detail-container {
+        padding: 16px 12px;
+    }
 }
 
 .back-button {
@@ -16,10 +32,25 @@
     cursor: pointer;
     transition: color 0.3s;
     width: fit-content;
+    padding: 8px;
+    margin-left: -8px;
 }
 
 .back-button:hover {
     color: var(--amarelo);
+}
+
+@media (max-width: 768px) {
+    .back-button {
+        font-size: 1.1em;
+        padding: 12px;
+        margin-bottom: 20px;
+        margin-left: -12px;
+    }
+    
+    .back-button .material-icons {
+        font-size: 1.5em;
+    }
 }
 
 .livro-detail-content {
@@ -29,10 +60,24 @@
     margin-bottom: 40px;
 }
 
+@media (max-width: 768px) {
+    .livro-detail-content {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-bottom: 24px;
+    }
+}
+
 .livro-cover-section {
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .livro-cover-section {
+        gap: 16px;
+    }
 }
 
 .livro-cover {
@@ -60,6 +105,20 @@
     justify-content: center;
     gap: 10px;
     transition: all 0.3s;
+    min-height: 48px;
+}
+
+@media (max-width: 768px) {
+    .btn-action {
+        padding: 16px 24px;
+        font-size: 1.05em;
+        min-height: 52px;
+        border-radius: 10px;
+    }
+    
+    .btn-action .material-icons {
+        font-size: 1.4em;
+    }
 }
 
 .btn-primary-action {
@@ -90,17 +149,37 @@
     gap: 24px;
 }
 
+@media (max-width: 768px) {
+    .livro-info-section {
+        gap: 20px;
+    }
+}
+
 .livro-title {
     font-size: 2.5em;
     font-weight: 700;
     margin: 0;
     color: var(--branco);
+    line-height: 1.2;
 }
 
 .livro-author {
     font-size: 1.3em;
     color: var(--amarelo);
     margin: 0;
+    margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+    .livro-title {
+        font-size: 1.8em;
+        line-height: 1.3;
+    }
+    
+    .livro-author {
+        font-size: 1.15em;
+        margin-top: 6px;
+    }
 }
 
 .livro-meta {
@@ -117,6 +196,21 @@
     gap: 8px;
 }
 
+@media (max-width: 768px) {
+    .livro-meta {
+        gap: 16px;
+        font-size: 1em;
+    }
+    
+    .livro-meta-item {
+        gap: 6px;
+    }
+    
+    .livro-meta-item .material-icons {
+        font-size: 1.3em;
+    }
+}
+
 .livro-rating-section {
     display: flex;
     align-items: center;
@@ -126,10 +220,29 @@
     border-radius: 12px;
 }
 
+@media (max-width: 768px) {
+    .livro-rating-section {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 24px;
+        padding: 20px 16px;
+        border-radius: 10px;
+    }
+}
+
 .current-rating {
     display: flex;
     flex-direction: column;
     gap: 8px;
+}
+
+@media (max-width: 768px) {
+    .current-rating {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+    }
 }
 
 .rating-stars {
@@ -138,10 +251,22 @@
     gap: 4px;
 }
 
+@media (max-width: 768px) {
+    .rating-stars {
+        gap: 2px;
+    }
+}
+
 .star {
     font-size: 1.5em;
     color: #ddd;
     transition: color 0.2s;
+}
+
+@media (max-width: 768px) {
+    .star {
+        font-size: 1.3em;
+    }
 }
 
 .star-filled {
@@ -158,9 +283,21 @@
     color: var(--branco);
 }
 
+@media (max-width: 768px) {
+    .rating-number {
+        font-size: 1.8em;
+    }
+}
+
 .rating-count {
     font-size: 0.9em;
     color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 768px) {
+    .rating-count {
+        font-size: 0.95em;
+    }
 }
 
 .vote-section {
@@ -172,15 +309,40 @@
     border-left: 2px solid rgba(255, 255, 255, 0.1);
 }
 
+@media (max-width: 768px) {
+    .vote-section {
+        border-left: none;
+        border-top: 2px solid rgba(255, 255, 255, 0.1);
+        padding-left: 0;
+        padding-top: 20px;
+        gap: 16px;
+    }
+}
+
 .vote-title {
     font-size: 1em;
     color: var(--branco);
     margin: 0;
 }
 
+@media (max-width: 768px) {
+    .vote-title {
+        font-size: 1.05em;
+        font-weight: 600;
+    }
+}
+
 .vote-stars {
     display: flex;
     gap: 8px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .vote-stars {
+        gap: 4px;
+        justify-content: center;
+    }
 }
 
 .vote-star {
@@ -188,6 +350,14 @@
     color: #ddd;
     cursor: pointer;
     transition: all 0.2s;
+    padding: 4px;
+}
+
+@media (max-width: 768px) {
+    .vote-star {
+        font-size: 2.2em;
+        padding: 8px;
+    }
 }
 
 .vote-star:hover,
@@ -207,6 +377,17 @@
     cursor: pointer;
     transition: all 0.3s;
     width: fit-content;
+    min-height: 48px;
+}
+
+@media (max-width: 768px) {
+    .btn-vote {
+        width: 100%;
+        padding: 16px 24px;
+        font-size: 1.05em;
+        min-height: 52px;
+        border-radius: 10px;
+    }
 }
 
 .btn-vote:hover {
