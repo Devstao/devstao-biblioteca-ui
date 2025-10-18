@@ -1,10 +1,15 @@
 import { API_BASE_URL, DEFAULT_HEADERS } from './config.js';
-
 async function getEscritores() {
     try {
+        const token = sessionStorage.getItem('authToken');
+        const headers = {
+            ...DEFAULT_HEADERS,
+            'Authorization': `Bearer ${token}`
+        };
+
         const response = await fetch(`${API_BASE_URL}/users/escritores`, {
             method: 'GET',
-            headers: DEFAULT_HEADERS
+            headers: headers
         });
 
         if (!response.ok) {
@@ -20,9 +25,15 @@ async function getEscritores() {
 
 async function getLivrosByEscritor(escritorId) {
     try {
+        const token = sessionStorage.getItem('authToken');
+        const headers = {
+            ...DEFAULT_HEADERS,
+            'Authorization': `Bearer ${token}`
+        };
+
         const response = await fetch(`${API_BASE_URL}/users/${escritorId}/livros`, {
             method: 'GET',
-            headers: DEFAULT_HEADERS
+            headers: headers
         });
 
         if (!response.ok) {
@@ -38,9 +49,15 @@ async function getLivrosByEscritor(escritorId) {
 
 async function getLivros() {
     try {
+        const token = sessionStorage.getItem('authToken');
+        const headers = {
+            ...DEFAULT_HEADERS,
+            'Authorization': `Bearer ${token}`
+        };
+
         const response = await fetch(`${API_BASE_URL}/livros`, {
             method: 'GET',
-            headers: DEFAULT_HEADERS
+            headers: headers
         });
 
         if (!response.ok) {
@@ -58,9 +75,15 @@ async function filterLivros(parameters) {
     const query = new URLSearchParams(parameters).toString();
 
     try {
+        const token = sessionStorage.getItem('authToken');
+        const headers = {
+            ...DEFAULT_HEADERS,
+            'Authorization': `Bearer ${token}`
+        };
+
         const response = await fetch(`${API_BASE_URL}/livros?${query}`, {
             method: 'GET',
-            headers: DEFAULT_HEADERS
+            headers: headers
         });
 
         if (!response.ok) {
@@ -74,4 +97,28 @@ async function filterLivros(parameters) {
     }
 }
 
-export { getEscritores, getLivrosByEscritor, getLivros, filterLivros };
+async function getLivroById(id) {
+    try {
+        const token = sessionStorage.getItem('authToken');
+        const headers = {
+            ...DEFAULT_HEADERS,
+            'Authorization': `Bearer ${token}`
+        };
+
+        const response = await fetch(`${API_BASE_URL}/livros/${id}`, {
+            method: 'GET',
+            headers: headers
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch livro details');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+}
+
+export { getEscritores, getLivrosByEscritor, getLivros, filterLivros, getLivroById };

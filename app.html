@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <link rel="icon" type="image/x-icon" href="assets/img/psvg.ico">
     <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="assets/css/app.css">
@@ -50,22 +50,27 @@
         <main class="main-content">
             <!-- Header -->
             <header class="app-header">
-                <div class="search-bar">
-                    <input type="text" placeholder="Pesquisar" class="search-input" id="searchInput">
-                    <button class="search-btn" onclick="searchLivros()">
-                        <span class="material-icons">search</span>
-                    </button>
-                </div>
                 <div class="user-profile">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" onclick="toggleSidebar()" aria-label="Menu">
+                        <span class="material-icons">menu</span>
+                    </button>
                     <span class="user-name" id="userName">Usuário</span>
-                    <img src="https://placehold.co/40" alt="User" class="user-avatar" id="userAvatar" onclick="toggleUserMenu()">
+                    <img src="https://placehold.co/40" alt="User" class="user-avatar" id="userAvatar"
+                        onclick="toggleUserMenu()">
                     <div class="user-menu" id="userMenu" style="display: none;">
                         <ul>
                             <li onclick="goToPerfil()"><span class="material-icons">person</span> Perfil</li>
-                            <li onclick="goToCadastroLivro()"><span class="material-icons">add_circle</span> Cadastrar Livro</li>
+                            <li onclick="goToCadastroLivro()"><span class="material-icons">add_circle</span> Cadastrar
+                                Livro</li>
                             <li onclick="logout()"><span class="material-icons">logout</span> Logout</li>
                         </ul>
                     </div>
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Pesquisar" class="search-input" id="searchInput">
+                    <button class="search-btn" onclick="searchLivros()" aria-label="Pesquisar">
+                        <span class="material-icons">search</span>
+                    </button>
                 </div>
             </header>
 
@@ -114,29 +119,41 @@
         import { getEscritores, getLivrosByEscritor, getLivros, filterLivros } from './assets/js/app.js';
         import { getAuthToken, checkAuth } from './assets/js/auth.js';
 
+        document.addEventListener('DOMContentLoaded', function () {
+            const userAvatar = document.getElementById('userAvatar');
+            const avatarUrl = sessionStorage.getItem('userAvatar');
+            if (avatarUrl) {
+                userAvatar.src = avatarUrl;
+            }
+        });
+
         function createBookCard(livro) {
-            const rating = livro.rating || 0;
+            const rating = livro.media_votos ? parseFloat(livro.media_votos) : 0;
             const fullStars = Math.floor(rating);
             const hasHalfStar = rating % 1 >= 0.5;
             const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
             let starsHTML = '';
             for (let i = 0; i < fullStars; i++) {
-                starsHTML += '<span class="material-icons star-filled">star</span>';
+                starsHTML += '<span class="material-icons" style="color: #FFD700;">star</span>';
             }
             if (hasHalfStar) {
-                starsHTML += '<span class="material-icons star-half">star_half</span>';
+                starsHTML += '<span class="material-icons" style="color: #FFD700;">star_half</span>';
             }
             for (let i = 0; i < emptyStars; i++) {
-                starsHTML += '<span class="material-icons star-empty">star_border</span>';
+                starsHTML += '<span class="material-icons" style="color: #FFD700;">star_border</span>';
             }
 
             return `
-                <div class="book-card">
+                <div class="book-card" onclick="window.location.href='livro.html?id=${livro.id}'" style="cursor: pointer;">
                     <img src="${livro.capa_url || 'https://placehold.co/150x200'}" alt="${livro.titulo}" class="book-cover">
                     <h3 class="book-title">${livro.titulo}</h3>
                     <div class="book-rating">
                         ${starsHTML}
+                        <span class="vote-info" style="display: block; font-size: 0.8em; color: #888; margin-top: 5px;">
+                            ${livro.total_votos || 0} voto${livro.total_votos !== 1 ? 's' : ''} 
+                            ${livro.media_votos ? `• Média: ${Number(livro.media_votos).toFixed(1)}` : ''}
+                        </span>
                     </div>
                 </div>
             `;
@@ -231,7 +248,7 @@
                 const topEscritores = escritores.slice(0, 4);
                 escritoresList.innerHTML = topEscritores.map(escritor => `
                     <li class="writer-item" onclick="filterByEscritor('${escritor.id}', '${escritor.nome}')" style="cursor: pointer;">
-                        <img src="${escritor.avatar || 'https://placehold.co/40'}" alt="${escritor.nome}" class="writer-avatar">
+                        <img src="${escritor.avatar_url || 'https://placehold.co/40'}" alt="${escritor.nome}" class="writer-avatar">
                         <span>${escritor.nome}</span>
                     </li>
                 `).join('');
@@ -245,7 +262,7 @@
         window.loadInitialData = async function () {
             if (!checkAuth()) return;
 
-            const userName = localStorage.getItem('userName') || 'Usuário';
+            const userName = sessionStorage.getItem('userName') || 'Usuário';
             document.getElementById('userName').textContent = userName;
 
             await loadEscritores();
@@ -266,31 +283,44 @@
             }
         }
 
-        window.toggleUserMenu = function() {
+        window.toggleUserMenu = function () {
             const menu = document.getElementById('userMenu');
             menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
         }
 
-        window.goToPerfil = function() {
+        window.goToPerfil = function () {
             window.location.href = 'perfil';
         }
 
-        window.goToCadastroLivro = function() {
+        window.goToCadastroLivro = function () {
             window.location.href = 'cadastro-livro';
         }
 
-        window.logout = function() {
-            localStorage.removeItem('authToken');
-            localStorage.removeItem('userName');
+        window.logout = function () {
+            sessionStorage.removeItem('authToken');
+            sessionStorage.removeItem('userName');
             window.location.href = 'login';
         }
 
-        document.addEventListener('click', function(event) {
+        window.toggleSidebar = function () {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('mobile-open');
+        }
+
+        document.addEventListener('click', function (event) {
             const userMenu = document.getElementById('userMenu');
             const userAvatar = document.getElementById('userAvatar');
-            
+            const sidebar = document.querySelector('.sidebar');
+            const menuToggle = document.getElementById('mobileMenuToggle');
+
             if (userMenu && !userMenu.contains(event.target) && event.target !== userAvatar) {
                 userMenu.style.display = 'none';
+            }
+
+            if (sidebar && sidebar.classList.contains('mobile-open') && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('mobile-open');
             }
         });
     </script>

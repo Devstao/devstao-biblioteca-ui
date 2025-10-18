@@ -1,0 +1,699 @@
+:root {
+  --amarelo: #FFD100;
+  --preto: #2e2e2e;
+  --branco: rgb(224, 224, 224);
+  --background-dark-blue: #222a38;
+  --branding-dark-blue: #1a202c;
+  --hover-gray-blue: #394761;
+  --placeholder-gray: #354a64;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--branco);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.perfil-body {
+  background-color: var(--background-dark-blue);
+  color: var(--branco);
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.branding {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: var(--branding-dark-blue);
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  padding: 2em 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.branding>div {
+  width: 100%;
+  max-width: 600px;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.branding h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color: var(--branco);
+  margin-bottom: 1em;
+}
+
+.branding h2 {
+  font-size: 1.5em;
+  margin-bottom: 1.5em;
+  color: var(--branco);
+}
+
+.preview-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 2em;
+}
+
+.profile-picture-placeholder {
+  width: 250px;
+  height: 250px;
+  min-height: 250px;
+  max-height: 250px;
+  min-width: 250px;
+  max-width: 250px;
+  border: 6px solid var(--placeholder-gray);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  flex-shrink: 0;
+  flex-grow: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.profile-picture-placeholder .material-icons {
+  font-size: 6em;
+  color: var(--hover-gray-blue);
+}
+
+.profile-name-container {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.profile-name-preview {
+  font-size: 2em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  margin: 0;
+  color: var(--branco);
+  font-weight: 600;
+}
+
+.profile-email-preview {
+  font-size: 1.2em;
+  color: var(--placeholder-gray);
+  margin: 0;
+}
+
+.form-section {
+  width: 50%;
+  padding: 4em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--background-dark-blue);
+  font-weight: 800;
+  overflow-y: auto;
+  flex-shrink: 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.form-section h2 {
+  font-size: 2em;
+  margin-bottom: 2em;
+  color: var(--branco);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5em;
+  margin-bottom: 2em;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.input-group label {
+  margin-bottom: 0.5em;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+.input-group input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--branco);
+  color: var(--branco);
+  font-size: 1em;
+  padding: 0.5em 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}
+
+.input-group input::placeholder {
+  color: var(--placeholder-gray);
+  opacity: 1;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-bottom: 1px solid var(--amarelo);
+}
+
+.upload-group {
+  margin-bottom: 2em;
+}
+
+.upload-group>label {
+  display: block;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+}
+
+.upload-area {
+  border: 2px dashed var(--branco);
+  border-radius: 8px;
+  padding: 2em;
+  text-align: center;
+  cursor: pointer;
+  display: block;
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.upload-area:hover {
+  background-color: var(--hover-gray-blue);
+  border-color: var(--amarelo);
+}
+
+.upload-area:active {
+  background-color: var(--hover-gray-blue);
+  transform: scale(0.98);
+}
+
+.upload-label-icon {
+  display: block;
+}
+
+.upload-label-icon .material-icons {
+  font-size: 3em;
+  color: var(--branco);
+}
+
+.upload-hint {
+  margin: 0.5em 0 0 0;
+  color: var(--placeholder-gray);
+  font-size: 0.9em;
+  font-weight: normal;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.btn {
+  padding: 1em 2em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1em;
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.btn-primary {
+  background-color: var(--amarelo);
+  color: var(--preto);
+}
+
+.btn-primary:hover {
+  background-color: #e6bc00;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 209, 0, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(255, 209, 0, 0.2);
+  background-color: #d4a900;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--branco);
+  border: 2px solid var(--branco);
+}
+
+.btn-secondary:hover {
+  background-color: var(--hover-gray-blue);
+  border-color: var(--amarelo);
+  color: var(--amarelo);
+}
+
+.btn-secondary:active {
+  background-color: #2c3e5a;
+  transform: scale(0.98);
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .branding,
+  .form-section {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .branding {
+    padding: 2em 1.5em;
+  }
+
+  .form-section {
+    padding: 2em 1.5em;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 1.8em;
+  }
+
+  .input-group.full-width {
+    grid-column: 1;
+  }
+
+  .profile-picture-placeholder {
+    width: 200px;
+    height: 200px;
+    min-height: 200px;
+    max-height: 200px;
+    min-width: 200px;
+    max-width: 200px;
+  }
+
+  .profile-picture-placeholder .material-icons {
+    font-size: 5em;
+  }
+
+  /* Aumentar área de toque dos inputs em tablets */
+  .input-group input {
+    padding: 0.8em 0;
+    font-size: 1.05em;
+  }
+
+  /* Melhorar botões em tablets */
+  .btn {
+    padding: 1.2em 2em;
+    font-size: 1.05em;
+  }
+
+  .upload-area {
+    padding: 2.5em;
+  }
+}
+
+@media (max-width: 768px) {
+  .branding {
+    padding: 1.5em 1em;
+  }
+
+  .branding>div {
+    padding: 1em;
+  }
+
+  .form-section {
+    padding: 1.5em 1em;
+  }
+
+  .form-section h2 {
+    font-size: 1.8em;
+    margin-bottom: 1.5em;
+  }
+
+  .form-grid {
+    gap: 2em;
+  }
+
+  /* Aumentar espaçamento entre elementos para melhor toque */
+  .input-group input {
+    padding: 1em 0;
+    font-size: 1.1em;
+    min-height: 44px; /* Altura mínima recomendada para toque */
+  }
+
+  .btn {
+    padding: 1.3em 2em;
+    font-size: 1.1em;
+    min-height: 50px;
+    margin-bottom: 1.2em;
+  }
+
+  .upload-area {
+    padding: 3em 2em;
+  }
+
+  .upload-label-icon .material-icons {
+    font-size: 3.5em;
+  }
+
+  .upload-hint {
+    font-size: 1em;
+    margin-top: 1em;
+  }
+
+  .upload-group {
+    margin-bottom: 2.5em;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Otimizar para dispositivos móveis pequenos */
+  html,
+  body {
+    font-size: 16px; /* Prevenir zoom automático no iOS */
+  }
+
+  .container {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .branding {
+    padding: 1.5em 1em;
+    min-height: auto;
+  }
+
+  .branding>div {
+    padding: 1em 0.5em;
+  }
+
+  .branding h1 {
+    font-size: 1.8em;
+    margin-bottom: 0.8em;
+  }
+
+  .branding h2 {
+    font-size: 1.3em;
+    margin-bottom: 1.2em;
+  }
+
+  .preview-content {
+    gap: 1.5em;
+  }
+
+  .profile-picture-placeholder {
+    width: 180px;
+    height: 180px;
+    min-height: 180px;
+    max-height: 180px;
+    min-width: 180px;
+    max-width: 180px;
+    border-width: 4px;
+  }
+
+  .profile-picture-placeholder .material-icons {
+    font-size: 4.5em;
+  }
+
+  .profile-name-preview {
+    font-size: 1.6em;
+    line-height: 1.3;
+    padding: 0 0.5em;
+  }
+
+  .profile-email-preview {
+    font-size: 1.1em;
+    line-height: 1.4;
+    padding: 0 0.5em;
+    word-break: break-all;
+  }
+
+  .form-section {
+    padding: 2em 1.2em;
+  }
+
+  .form-section h2 {
+    font-size: 1.6em;
+    margin-bottom: 1.8em;
+  }
+
+  .form-grid {
+    gap: 2.2em;
+  }
+
+  .input-group label {
+    font-size: 1em;
+    margin-bottom: 0.6em;
+  }
+
+  /* Inputs otimizados para toque mobile */
+  .input-group input {
+    padding: 1.1em 0.3em;
+    font-size: 1.1em;
+    min-height: 48px;
+    border-bottom-width: 2px;
+  }
+
+  .input-group input:focus {
+    border-bottom-width: 2px;
+  }
+
+  /* Aumentar área de upload para melhor interação */
+  .upload-group {
+    margin-bottom: 2.5em;
+  }
+
+  .upload-group>label {
+    font-size: 1em;
+    margin-bottom: 0.8em;
+  }
+
+  .upload-area {
+    padding: 3em 1.5em;
+    border-width: 3px;
+  }
+
+  .upload-label-icon .material-icons {
+    font-size: 4em;
+  }
+
+  .upload-hint {
+    font-size: 1.05em;
+    margin-top: 1em;
+    line-height: 1.4;
+  }
+
+  /* Botões otimizados para toque */
+  .btn {
+    padding: 1.4em 2em;
+    font-size: 1.15em;
+    min-height: 54px;
+    margin-bottom: 1.5em;
+    border-radius: 8px;
+    font-weight: 700;
+  }
+
+  .btn-secondary {
+    border-width: 2px;
+  }
+}
+
+/* Melhorias adicionais para dispositivos muito pequenos */
+@media (max-width: 360px) {
+  .branding h1 {
+    font-size: 1.6em;
+  }
+
+  .branding h2 {
+    font-size: 1.2em;
+  }
+
+  .profile-picture-placeholder {
+    width: 160px;
+    height: 160px;
+    min-height: 160px;
+    max-height: 160px;
+    min-width: 160px;
+    max-width: 160px;
+  }
+
+  .profile-picture-placeholder .material-icons {
+    font-size: 4em;
+  }
+
+  .profile-name-preview {
+    font-size: 1.4em;
+  }
+
+  .form-section {
+    padding: 1.5em 1em;
+  }
+
+  .form-section h2 {
+    font-size: 1.4em;
+  }
+
+  .upload-area {
+    padding: 2.5em 1em;
+  }
+
+  .btn {
+    padding: 1.3em 1.5em;
+  }
+}
+
+/* Otimizações para orientação paisagem em mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .container {
+    flex-direction: row;
+    overflow-y: auto;
+  }
+
+  .branding {
+    width: 40%;
+    padding: 1em;
+  }
+
+  .branding>div {
+    padding: 0.5em;
+  }
+
+  .branding h1 {
+    font-size: 1.4em;
+    margin-bottom: 0.5em;
+  }
+
+  .branding h2 {
+    font-size: 1.1em;
+    margin-bottom: 1em;
+  }
+
+  .preview-content {
+    gap: 1em;
+  }
+
+  .profile-picture-placeholder {
+    width: 120px;
+    height: 120px;
+    min-height: 120px;
+    max-height: 120px;
+    min-width: 120px;
+    max-width: 120px;
+    border-width: 3px;
+  }
+
+  .profile-picture-placeholder .material-icons {
+    font-size: 3em;
+  }
+
+  .profile-name-preview {
+    font-size: 1.2em;
+  }
+
+  .profile-email-preview {
+    font-size: 0.95em;
+  }
+
+  .form-section {
+    width: 60%;
+    padding: 1.5em 1em;
+  }
+
+  .form-section h2 {
+    font-size: 1.4em;
+    margin-bottom: 1em;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2em;
+  }
+
+  .input-group.full-width {
+    grid-column: 1 / -1;
+  }
+
+  .upload-area {
+    padding: 1.5em;
+  }
+
+  .upload-label-icon .material-icons {
+    font-size: 2.5em;
+  }
+
+  .btn {
+    padding: 1em 1.5em;
+    min-height: 44px;
+  }
+}
+
+/* Suporte para notch/safe areas em dispositivos modernos */
+@supports (padding: max(0px)) {
+  .branding,
+  .form-section {
+    padding-left: max(1em, env(safe-area-inset-left));
+    padding-right: max(1em, env(safe-area-inset-right));
+  }
+
+  @media (max-width: 768px) {
+    .branding,
+    .form-section {
+      padding-top: max(1.5em, env(safe-area-inset-top));
+      padding-bottom: max(1.5em, env(safe-area-inset-bottom));
+    }
+  }
+}

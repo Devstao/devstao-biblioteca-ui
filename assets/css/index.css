@@ -12,12 +12,13 @@ html,
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  min-height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--branco);
+  overflow-x: hidden;
 }
 
 .fex-col {
@@ -116,6 +117,12 @@ ul {
   align-self: center;
   margin-left: -20%;
   margin-top: 2%;
+  flex-shrink: 0;
+}
+
+.align-svg img {
+  max-width: 100%;
+  height: auto;
 }
 
 
@@ -356,4 +363,361 @@ ul {
 .btn-primary {
   background-color: var(--amarelo);
   color: var(--preto);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Login Page Specific Styles */
+.login-body {
+  overflow-y: auto;
+}
+
+.login-form-container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.login-title {
+  font-size: 2em;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.login-input {
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.login-input:focus {
+  outline: none;
+  border-bottom-color: var(--amarelo);
+}
+
+.password-container {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  user-select: none;
+}
+
+.login-link-container {
+  margin: 8px 0;
+}
+
+.login-link-text {
+  display: inline-block;
+  line-height: 1.5;
+}
+
+.login-link {
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+}
+
+.login-link:hover {
+  opacity: 0.8;
+}
+
+.login-button {
+  width: 100%;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 209, 0, 0.3);
+}
+
+.login-button:active {
+  transform: translateY(0);
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  html,
+  body {
+    flex-direction: column;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  .align-svg {
+    margin-left: 0;
+    margin-top: 8%;
+    margin-bottom: 4%;
+  }
+
+  .align-svg img {
+    width: 60%;
+    max-width: 180px;
+  }
+
+  .cadastro-sidebar {
+    width: 100%;
+    min-height: auto;
+    position: static;
+    padding: 10% 8%;
+    box-sizing: border-box;
+  }
+
+  .posicao-sidebar {
+    position: static;
+  }
+
+  .pb-4 {
+    padding-top: 8%;
+    padding-bottom: 12%;
+  }
+
+  h1 {
+    font-size: 1.8em;
+    margin-bottom: 0;
+  }
+
+  input {
+    font-size: 16px;
+    min-height: 48px;
+    padding: 14px 16px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  button {
+    min-height: 52px;
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
+  .material-icons {
+    font-size: 26px;
+  }
+
+  .fex-col {
+    gap: 24px;
+  }
+
+  .border-white {
+    padding-bottom: 4px;
+  }
+
+  .align-end {
+    margin-bottom: 4px;
+  }
+
+  .justify-content-end {
+    margin: 12px 0;
+  }
+
+  .justify-content-end small {
+    font-size: 0.9em;
+    line-height: 1.4;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  .branding {
+    width: 100%;
+    padding: 2em 1em;
+  }
+
+  .book-cover-placeholder {
+    width: 80%;
+    height: 400px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+
+  .form-section {
+    width: 100%;
+    padding: 2em 1.5em;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5em;
+  }
+
+  .form-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 1.5em;
+  }
+
+  /* Login Mobile Styles */
+  .login-form-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .login-title {
+    font-size: 1.8em;
+  }
+
+  .login-input {
+    font-size: 16px;
+    min-height: 48px;
+  }
+
+  .password-container .login-input {
+    padding-right: 50px;
+  }
+
+  .password-toggle {
+    right: 12px;
+    font-size: 24px;
+  }
+
+  .login-link-text {
+    text-align: center;
+    display: block;
+  }
+
+  .login-button {
+    font-size: 17px;
+    min-height: 52px;
+  }
+}
+
+@media (max-width: 480px) {
+  .align-svg {
+    margin-top: 12%;
+    margin-bottom: 6%;
+  }
+
+  .align-svg img {
+    width: 55%;
+    max-width: 140px;
+  }
+
+  .cadastro-sidebar {
+    padding: 12% 6%;
+  }
+
+  h1 {
+    font-size: 1.6em;
+  }
+
+  small {
+    font-size: 0.88em;
+  }
+
+  .padding {
+    padding: 14px;
+  }
+
+  input {
+    font-size: 16px;
+    min-height: 50px;
+  }
+
+  button {
+    min-height: 54px;
+  }
+
+  /* Login Small Mobile */
+  .login-title {
+    font-size: 1.6em;
+  }
+
+  .login-input {
+    font-size: 16px;
+    min-height: 50px;
+  }
+
+  .login-button {
+    font-size: 16px;
+    min-height: 54px;
+  }
+
+  .password-toggle {
+    font-size: 22px;
+  }
+
+  .fex-col {
+    gap: 20px;
+  }
+
+  .pb-4 {
+    padding-top: 10%;
+    padding-bottom: 15%;
+  }
+
+  .book-cover-placeholder {
+    height: 300px;
+  }
+
+  .form-section {
+    padding: 1.5em 1em;
+  }
+
+  .form-section h2 {
+    font-size: 1.3em;
+  }
+
+  .upload-area {
+    padding: 1.5em;
+  }
+}
+
+@media (max-width: 360px) {
+  .cadastro-sidebar {
+    padding: 10% 5%;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  input, button {
+    font-size: 15px;
+  }
+
+  .fex-col {
+    gap: 18px;
+  }
+
+  .align-svg img {
+    width: 50%;
+    max-width: 120px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .cadastro-sidebar {
+    width: 45%;
+    padding: 6%;
+  }
+
+  .align-svg {
+    margin-left: -15%;
+  }
+
+  .align-svg img {
+    max-width: 250px;
+  }
+
+  input {
+    font-size: 16px;
+    min-height: 46px;
+  }
+
+  button {
+    min-height: 50px;
+  }
 }
