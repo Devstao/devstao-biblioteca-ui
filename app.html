@@ -235,7 +235,7 @@
                 const topEscritores = escritores.slice(0, 4);
                 escritoresList.innerHTML = topEscritores.map(escritor => `
                     <li class="writer-item" onclick="filterByEscritor('${escritor.id}', '${escritor.nome}')" style="cursor: pointer;">
-                        <img src="${escritor.avatar || 'https://placehold.co/40'}" alt="${escritor.nome}" class="writer-avatar">
+                        <img src="${escritor.avatar_url || 'https://placehold.co/40'}" alt="${escritor.nome}" class="writer-avatar">
                         <span>${escritor.nome}</span>
                     </li>
                 `).join('');
