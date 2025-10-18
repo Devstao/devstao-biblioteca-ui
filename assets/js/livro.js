@@ -249,6 +249,7 @@ window.loadLivroDetails = async function () {
         document.getElementById('livro-edicao').textContent = livro.edicao || '-';
         document.getElementById('livro-ano').textContent = livro.ano_publicacao || '-';
         document.getElementById('livro-editora').textContent = livro.editora || '-';
+        document.getElementById('livro-upload-por').textContent = livro.usuario_nome || '-';
 
         const categoriaLabel = categoriaLabels[livro.categoria] || livro.categoria || 'Outros';
         document.getElementById('livro-categoria').innerHTML = `<span class="category-badge">${categoriaLabel}</span>`;
