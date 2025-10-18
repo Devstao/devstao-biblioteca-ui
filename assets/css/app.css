@@ -252,11 +252,15 @@
     display: flex;
     flex-direction: column;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .book-card:hover {
     transform: translateY(-8px);
+}
+
+.book-card:hover .book-cover {
+    box-shadow: 0 8px 24px rgba(255, 209, 0, 0.3);
 }
 
 .book-cover {

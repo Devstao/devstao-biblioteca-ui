@@ -132,7 +132,7 @@
             }
 
             return `
-                <div class="book-card">
+                <div class="book-card" onclick="window.location.href='livro.html?id=${livro.id}'" style="cursor: pointer;">
                     <img src="${livro.capa_url || 'https://placehold.co/150x200'}" alt="${livro.titulo}" class="book-cover">
                     <h3 class="book-title">${livro.titulo}</h3>
                     <div class="book-rating">
