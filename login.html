@@ -16,28 +16,27 @@
 
 </head>
 
-<body class="bg-blue fex-col ">
+<body class="bg-blue fex-col login-body">
     <div class="align-svg">
         <img src="./assets/psvg.svg" alt="Ícone SVG">
-
     </div>
-    <div class="cadastro-sidebar posicao-sidebar text-center fex-col padding">
-        <h1 class="text-white pb-4">Acessar</h1>
+    <div class="cadastro-sidebar posicao-sidebar text-center fex-col padding login-form-container">
+        <h1 class="text-white pb-4 login-title">Acessar</h1>
 
-        <input placeholder="Digite o seu email" class=" bg-dark text-white padding  border-white pe-name" id="email" />
+        <input placeholder="Digite o seu email" class="bg-dark text-white padding border-white pe-name login-input" id="email" type="email" />
 
-        <div class="border-white align-end "><input type="password" placeholder="Digite a sua senha"
-                class=" bg-dark text-white padding  border-name pe-name" id="password" />
-            <span class="material-icons me-4" id="togglePassword" style="cursor: pointer;">remove_red_eye</span>
+        <div class="border-white align-end password-container">
+            <input type="password" placeholder="Digite a sua senha" class="bg-dark text-white padding border-name pe-name login-input" id="password" />
+            <span class="material-icons me-4 password-toggle" id="togglePassword" style="cursor: pointer;">remove_red_eye</span>
         </div>
 
-        <div class="justify-content-end">
-            <small class=" me-4">não tem uma conta? <small class="text-yellow">
-                    <a href="cadastro" class="text-yellow" style="text-decoration: none;">Cadastre-se</a>
+        <div class="justify-content-end login-link-container">
+            <small class="me-4 login-link-text">não tem uma conta? <small class="text-yellow">
+                    <a href="cadastro" class="text-yellow login-link" style="text-decoration: none;">Cadastre-se</a>
                 </small>
             </small>
         </div>
-        <button class="padding rounded yellow border" id="loginButton" style="cursor: pointer;">Acessar</button>
+        <button class="padding rounded yellow border login-button" id="loginButton" style="cursor: pointer;">Acessar</button>
     </div>
 
     <div class="toast-container" id="toast-container">
