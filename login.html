@@ -74,10 +74,10 @@
 
             try {
                 const response = await login(email, password);
-                console.log('Login response:', response);
                 if (response.token) {
-                    localStorage.setItem('authToken', response.token);
-                    localStorage.setItem('userName', response.nome);
+                    sessionStorage.setItem('authToken', response.token);
+                    sessionStorage.setItem('userName', response.nome);
+                    sessionStorage.setItem('userAvatar', response.avatar_url);
                     showToast('success', 'Login Bem-sucedido', 'Redirecionando para a página inicial.');
 
                     setTimeout(() => {

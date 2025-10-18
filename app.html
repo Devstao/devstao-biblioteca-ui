@@ -58,11 +58,13 @@
                 </div>
                 <div class="user-profile">
                     <span class="user-name" id="userName">Usuário</span>
-                    <img src="https://placehold.co/40" alt="User" class="user-avatar" id="userAvatar" onclick="toggleUserMenu()">
+                    <img src="https://placehold.co/40" alt="User" class="user-avatar" id="userAvatar"
+                        onclick="toggleUserMenu()">
                     <div class="user-menu" id="userMenu" style="display: none;">
                         <ul>
                             <li onclick="goToPerfil()"><span class="material-icons">person</span> Perfil</li>
-                            <li onclick="goToCadastroLivro()"><span class="material-icons">add_circle</span> Cadastrar Livro</li>
+                            <li onclick="goToCadastroLivro()"><span class="material-icons">add_circle</span> Cadastrar
+                                Livro</li>
                             <li onclick="logout()"><span class="material-icons">logout</span> Logout</li>
                         </ul>
                     </div>
@@ -113,6 +115,14 @@
         import { showToast } from './assets/js/toast.js';
         import { getEscritores, getLivrosByEscritor, getLivros, filterLivros } from './assets/js/app.js';
         import { getAuthToken, checkAuth } from './assets/js/auth.js';
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const userAvatar = document.getElementById('userAvatar');
+            const avatarUrl = sessionStorage.getItem('userAvatar');
+            if (avatarUrl) {
+                userAvatar.src = avatarUrl;
+            }
+        });
 
         function createBookCard(livro) {
             const rating = livro.media_votos ? parseFloat(livro.media_votos) : 0;
@@ -235,7 +245,7 @@
                 const topEscritores = escritores.slice(0, 4);
                 escritoresList.innerHTML = topEscritores.map(escritor => `
                     <li class="writer-item" onclick="filterByEscritor('${escritor.id}', '${escritor.nome}')" style="cursor: pointer;">
-                        <img src="${escritor.avatar || 'https://placehold.co/40'}" alt="${escritor.nome}" class="writer-avatar">
+                        <img src="${escritor.avatar_url || 'https://placehold.co/40'}" alt="${escritor.nome}" class="writer-avatar">
                         <span>${escritor.nome}</span>
                     </li>
                 `).join('');
@@ -249,7 +259,7 @@
         window.loadInitialData = async function () {
             if (!checkAuth()) return;
 
-            const userName = localStorage.getItem('userName') || 'Usuário';
+            const userName = sessionStorage.getItem('userName') || 'Usuário';
             document.getElementById('userName').textContent = userName;
 
             await loadEscritores();
@@ -270,29 +280,29 @@
             }
         }
 
-        window.toggleUserMenu = function() {
+        window.toggleUserMenu = function () {
             const menu = document.getElementById('userMenu');
             menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
         }
 
-        window.goToPerfil = function() {
+        window.goToPerfil = function () {
             window.location.href = 'perfil';
         }
 
-        window.goToCadastroLivro = function() {
+        window.goToCadastroLivro = function () {
             window.location.href = 'cadastro-livro';
         }
 
-        window.logout = function() {
-            localStorage.removeItem('authToken');
-            localStorage.removeItem('userName');
+        window.logout = function () {
+            sessionStorage.removeItem('authToken');
+            sessionStorage.removeItem('userName');
             window.location.href = 'login';
         }
 
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             const userMenu = document.getElementById('userMenu');
             const userAvatar = document.getElementById('userAvatar');
-            
+
             if (userMenu && !userMenu.contains(event.target) && event.target !== userAvatar) {
                 userMenu.style.display = 'none';
             }

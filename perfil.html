@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/perfil.css">
+    <link rel="stylesheet" href="assets/css/toast.css">
+    <link rel="icon" type="image/x-icon" href="assets/img/psvg.ico">
+
+    <title>Pardoxandria - Perfil do Usuário</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body class="perfil-body">
+    <div class="container">
+        <aside class="branding">
+            <div class="">
+                <h1>PARDOXANDRIA</h1>
+                <h2>Pré-visualização do perfil</h2>
+                <div class="preview-content">
+                    <div class="profile-picture-placeholder">
+                        <i class="material-icons">person</i>
+                    </div>
+                    <div class="profile-name-container">
+                        <h3 class="profile-name-preview">Seu Nome</h3>
+                        <p class="profile-email-preview">seu.email@exemplo.com</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <main class="form-section">
+            <h2>Editar perfil</h2>
+            <form id="perfil-form">
+                <div class="form-grid">
+                    <div class="input-group full-width">
+                        <label for="nome">Nome completo</label>
+                        <input type="text" id="nome" placeholder="Digite seu nome completo" required>
+                    </div>
+                    <div class="input-group full-width">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Digite seu email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="senha">Nova senha</label>
+                        <input type="password" id="senha" placeholder="Digite a nova senha (opcional)">
+                    </div>
+                    <div class="input-group">
+                        <label for="confirmacao_senha">Confirmar senha</label>
+                        <input type="password" id="confirmacao_senha" placeholder="Confirme a nova senha">
+                    </div>
+                </div>
+
+                <div class="upload-group">
+                    <label>Foto de perfil</label>
+                    <label for="upload_foto" class="upload-area">
+                        <span class="upload-label-icon">
+                            <i class="material-icons">add_photo_alternate</i>
+                        </span>
+                        <p class="upload-hint">Clique para adicionar uma foto</p>
+                    </label>
+                    <input type="file" id="upload_foto" class="visually-hidden" accept="image/*">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Salvar alterações</button>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='app.html'">Cancelar</button>
+            </form>
+        </main>
+    </div>
+
+    <div class="toast-container" id="toast-container">
+        <div class="toast" id="toast">
+            <div class="toast-content">
+                <div class="toast-icon">
+                    <i class="fas fa-check check"></i>
+                    <i class="fas fa-times error"></i>
+                </div>
+                <div class="message">
+                    <span class="text text-1"></span>
+                    <span class="text text-2"></span>
+                </div>
+            </div>
+            <i class="fa-solid fa-xmark close"></i>
+            <div class="progress"></div>
+        </div>
+    </div>
+
+</body>
+
+<script type="module" src="assets/js/perfil.js"></script>
+
+</html>
