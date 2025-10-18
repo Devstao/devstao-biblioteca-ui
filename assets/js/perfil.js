@@ -71,6 +71,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 if (avatarResponse.ok) {
                     showToast('success', 'Sucesso', 'Avatar atualizado com sucesso!');
+                    const userData = await avatarResponse.json();
+                    if (userData.user.avatar_url) {
+                        sessionStorage.setItem('userAvatar', userData.user.avatar_url);
+                    }
                 } else {
                     const error = await avatarResponse.json();
                     console.error('Erro ao atualizar avatar:', error);
