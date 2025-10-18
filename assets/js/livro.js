@@ -21,7 +21,7 @@ const categoriaLabels = {
 
 async function getLivroById(id) {
     try {
-        const token = localStorage.getItem('authToken');
+        const token = sessionStorage.getItem('authToken');
         const headers = {
             ...DEFAULT_HEADERS,
             'Authorization': `Bearer ${token}`
@@ -45,7 +45,7 @@ async function getLivroById(id) {
 
 async function submitVotacao(livroId, nota, votacaoId = null) {
     try {
-        const token = localStorage.getItem('authToken');
+        const token = sessionStorage.getItem('authToken');
         const headers = {
             ...DEFAULT_HEADERS,
             'Authorization': `Bearer ${token}`
@@ -286,7 +286,7 @@ window.loadLivroDetails = async function () {
 // Função para registrar visualização do livro
 async function registrarVisualizacao(livroId) {
     try {
-        const token = localStorage.getItem('authToken');
+        const token = sessionStorage.getItem('authToken');
         const headers = {
             ...DEFAULT_HEADERS,
             'Authorization': `Bearer ${token}`

@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const confirmacaoSenhaInput = document.getElementById('confirmacao_senha');
 
     // Verificar se o usuário está autenticado
-    const token = localStorage.getItem('authToken');
+    const token = sessionStorage.getItem('authToken');
     if (!token) {
         showToast('error', 'Erro', 'Você precisa estar logado para acessar esta página');
         setTimeout(() => {
@@ -162,9 +162,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             showToast('success', 'Sucesso', 'Perfil atualizado com sucesso!');
 
-            // Atualizar nome no localStorage
+            // Atualizar nome no sessionStorage
             if (userData.user && userData.user.nome) {
-                localStorage.setItem('userName', userData.user.nome);
+                sessionStorage.setItem('userName', userData.user.nome);
             }
 
             // Limpar campos de senha

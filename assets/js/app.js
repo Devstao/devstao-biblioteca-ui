@@ -1,7 +1,7 @@
 import { API_BASE_URL, DEFAULT_HEADERS } from './config.js';
 async function getEscritores() {
     try {
-        const token = localStorage.getItem('authToken');
+        const token = sessionStorage.getItem('authToken');
         const headers = {
             ...DEFAULT_HEADERS,
             'Authorization': `Bearer ${token}`
@@ -25,7 +25,7 @@ async function getEscritores() {
 
 async function getLivrosByEscritor(escritorId) {
     try {
-        const token = localStorage.getItem('authToken');
+        const token = sessionStorage.getItem('authToken');
         const headers = {
             ...DEFAULT_HEADERS,
             'Authorization': `Bearer ${token}`
@@ -49,7 +49,7 @@ async function getLivrosByEscritor(escritorId) {
 
 async function getLivros() {
     try {
-        const token = localStorage.getItem('authToken');
+        const token = sessionStorage.getItem('authToken');
         const headers = {
             ...DEFAULT_HEADERS,
             'Authorization': `Bearer ${token}`
@@ -75,7 +75,7 @@ async function filterLivros(parameters) {
     const query = new URLSearchParams(parameters).toString();
 
     try {
-        const token = localStorage.getItem('authToken');
+        const token = sessionStorage.getItem('authToken');
         const headers = {
             ...DEFAULT_HEADERS,
             'Authorization': `Bearer ${token}`
@@ -99,7 +99,7 @@ async function filterLivros(parameters) {
 
 async function getLivroById(id) {
     try {
-        const token = localStorage.getItem('authToken');
+        const token = sessionStorage.getItem('authToken');
         const headers = {
             ...DEFAULT_HEADERS,
             'Authorization': `Bearer ${token}`

@@ -33,7 +33,7 @@ function register(nome, email, password) {
 }
 
 function getAuthToken() {
-    return localStorage.getItem('authToken');
+    return sessionStorage.getItem('authToken');
 }
 
 function checkAuth() {
