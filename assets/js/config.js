@@ -1,6 +1,6 @@
 const API_BASE_URL = window.location.hostname === 'localhost'
     ? 'http://localhost:3000/api'
-    : 'https://pardoxandria-api.devstao.dev';
+    : 'https://pardoxandria-api.devstao.dev/api';
 
 const DEFAULT_HEADERS = {
     'Content-Type': 'application/json',
