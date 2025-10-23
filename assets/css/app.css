@@ -209,7 +209,6 @@
 .user-menu {
     position: absolute;
     top: 50px;
-    right: 0;
     background-color: var(--branding-dark-blue);
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
